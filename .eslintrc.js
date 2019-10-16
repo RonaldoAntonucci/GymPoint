@@ -22,6 +22,8 @@ module.exports = {
     "no-param-reassign": "off",
     "camelcase": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
+    //Coloquei essa conf pois estava dando problema quando migrava o código
+    //do windows pro linux e vice versa
     "linebreak-style": "off"
   },
 };
