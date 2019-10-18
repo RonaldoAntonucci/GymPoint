@@ -5,6 +5,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
+import RegistrationController from './app/controllers/RegistrationController';
 
 import authMiddleware from './app/middlewares/auth';
 import checkStudentExist from './app/middlewares/checkStudentExist';
@@ -26,5 +27,7 @@ routes.get('/plans', checkUserAdmin, PlanController.index);
 routes.post('/plans', checkUserAdmin, PlanController.store);
 routes.put('/plans/:planId', checkUserAdmin, PlanController.update);
 routes.delete('/plans/:planId', checkUserAdmin, PlanController.delete);
+
+routes.post('/registrations', checkUserAdmin, RegistrationController.store);
 
 export default routes;

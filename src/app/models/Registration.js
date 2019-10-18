@@ -1,0 +1,33 @@
+import Sequelize, { Model } from 'sequelize';
+import { subMonths } from 'date-fns';
+import Plan from './Plan';
+
+class Registration extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        start_date: Sequelize.DATE,
+        end_date: Sequelize.DATE,
+        price: Sequelize.DOUBLE,
+      },
+      {
+        sequelize,
+      }
+    );
+
+    this.addHook('beforeCreate', async registration => {
+      const plan = await Plan.findByPk(registration.plan_id);
+      registration.price = plan.price * plan.duration;
+      registration.end_date = subMonths(registration.start_date, plan.duration);
+    });
+
+    return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Student, { foreignKey: 'student_id', as: 'student' });
+    this.belongsTo(models.Plan, { foreignKey: 'plan_id', as: 'plan' });
+  }
+}
+
+export default Registration;
