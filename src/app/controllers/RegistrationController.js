@@ -4,6 +4,9 @@ import { isBefore, parseISO, isValid } from 'date-fns';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
 
+import RegistrationMail from '../jobs/registrationMail';
+import Queue from '../../lib/Queue';
+
 import Registration from '../models/Registration';
 
 class RegistrationController {
@@ -22,13 +25,14 @@ class RegistrationController {
     }
 
     const { plan_id, student_id } = req.body;
-    const checkPlanExist = await Plan.findByPk(plan_id);
-    if (!checkPlanExist) {
+
+    const plan = await Plan.findByPk(plan_id);
+    if (!plan) {
       return res.status(401).json({ error: 'This plan_id is invalid.' });
     }
 
-    const checkIsStudent = await Student.findByPk(student_id);
-    if (!checkIsStudent) {
+    const student = await Student.findByPk(student_id);
+    if (!student) {
       return res.status(401).json({ error: 'This student_id is invalid.' });
     }
 
@@ -43,7 +47,15 @@ class RegistrationController {
       return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
-    const { start_date, end_date, price } = await Registration.create(req.body);
+    const registration = await Registration.create(req.body);
+
+    await Queue.add(RegistrationMail.key, {
+      registration,
+      student,
+      plan,
+    });
+
+    const { start_date, end_date, price } = registration;
 
     return res.json({ start_date, end_date, price });
   }
