@@ -28,6 +28,17 @@ routes.post('/plans', checkUserAdmin, PlanController.store);
 routes.put('/plans/:planId', checkUserAdmin, PlanController.update);
 routes.delete('/plans/:planId', checkUserAdmin, PlanController.delete);
 
+routes.get('/registrations', checkUserAdmin, RegistrationController.index);
 routes.post('/registrations', checkUserAdmin, RegistrationController.store);
+routes.put(
+  '/registrations/:registrationId',
+  checkUserAdmin,
+  RegistrationController.update
+);
+routes.delete(
+  '/registrations/:registrationId',
+  checkUserAdmin,
+  RegistrationController.delete
+);
 
 export default routes;
