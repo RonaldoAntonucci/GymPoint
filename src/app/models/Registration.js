@@ -1,5 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
-import { addMonths, addDays, differenceInDays } from 'date-fns';
+import { addMonths, addDays, differenceInDays, isBefore } from 'date-fns';
 import Plan from './Plan';
 
 class Registration extends Model {
@@ -9,6 +9,12 @@ class Registration extends Model {
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
         price: Sequelize.DOUBLE,
+        active: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return isBefore(new Date(), this.end_date);
+          },
+        },
       },
       {
         sequelize,

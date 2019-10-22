@@ -6,6 +6,7 @@ import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
+import CheckinController from './app/controllers/CheckinController';
 
 import authMiddleware from './app/middlewares/auth';
 import checkStudentExist from './app/middlewares/checkStudentExist';
@@ -22,6 +23,17 @@ routes.put('/users', UserController.update);
 
 routes.post('/students', StudentController.store);
 routes.put('/students/:studentId', checkStudentExist, StudentController.update);
+
+routes.get(
+  '/students/:studentId/checkins',
+  checkStudentExist,
+  CheckinController.index
+);
+routes.post(
+  '/students/:studentId/checkins',
+  checkStudentExist,
+  CheckinController.store
+);
 
 routes.get('/plans', checkUserAdmin, PlanController.index);
 routes.post('/plans', checkUserAdmin, PlanController.store);
