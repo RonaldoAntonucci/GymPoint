@@ -1,4 +1,3 @@
-// import * as Yup from 'yup';
 import { subDays } from 'date-fns';
 import { Op } from 'sequelize';
 
@@ -6,9 +5,16 @@ import Checkin from '../models/Checkin';
 
 class CheckinController {
   async index(req, res) {
+    const pageLimit = process.env.PAGE_LIMIT;
+    const { page = 1 } = req.query;
     const { studentId: student_id } = req.params;
 
-    const checkins = await Checkin.findAll({ where: { student_id } });
+    const checkins = await Checkin.findAll({
+      where: { student_id },
+      order: [['updated_at', 'DESC']],
+      limit: pageLimit,
+      offset: (page - 1) * pageLimit,
+    });
     res.json(checkins);
   }
 

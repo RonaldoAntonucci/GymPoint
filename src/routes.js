@@ -7,6 +7,8 @@ import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
+import HelpOrderController from './app/controllers/HelpOrderController';
+import AnswerController from './app/controllers/AnswerController';
 
 import authMiddleware from './app/middlewares/auth';
 import checkStudentExist from './app/middlewares/checkStudentExist';
@@ -24,6 +26,7 @@ routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);
 routes.put('/students/:studentId', checkStudentExist, StudentController.update);
 
+// checkins
 routes.get(
   '/students/:studentId/checkins',
   checkStudentExist,
@@ -33,6 +36,26 @@ routes.post(
   '/students/:studentId/checkins',
   checkStudentExist,
   CheckinController.store
+);
+
+// help orders
+routes.get('/help-orders', checkUserAdmin, HelpOrderController.indexAdmin);
+routes.get(
+  '/students/:studentId/help-orders',
+  checkStudentExist,
+  HelpOrderController.indexUser
+);
+routes.post(
+  '/students/:studentId/help-orders',
+  checkStudentExist,
+  HelpOrderController.store
+);
+
+// answer orders
+routes.post(
+  '/help-orders/:orderId/answer',
+  checkUserAdmin,
+  AnswerController.store
 );
 
 routes.get('/plans', checkUserAdmin, PlanController.index);
