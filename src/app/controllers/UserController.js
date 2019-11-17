@@ -31,7 +31,11 @@ class UserController {
       return res.status(400).json({ error: 'User already existis.' });
     }
 
-    const { id, name, email, provider } = await User.create(req.body);
+    const { id, name, email, provider } = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password,
+    });
 
     return res.json({
       id,
@@ -51,7 +55,7 @@ class UserController {
         .when('oldPassword', (oldPassword, field) =>
           oldPassword ? field.required() : field
         ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
+      passwordConfirm: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
     });
@@ -64,11 +68,11 @@ class UserController {
 
     const user = await User.findByPk(req.userId);
 
-    if (email !== user.email) {
+    if (email && email !== user.email) {
       const userExists = await User.findOne({ where: { email } });
 
       if (userExists) {
-        return res.status(400).json({ error: 'User already exists.' });
+        return res.status(400).json({ error: 'Email already in use.' });
       }
     }
 
