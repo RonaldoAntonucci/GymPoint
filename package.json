@@ -28,6 +28,7 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.19.6",
     "youch": "^2.0.10",
+    "redis-mock": "^0.47.0",
     "yup": "^0.27.0"
   },
   "devDependencies": {
