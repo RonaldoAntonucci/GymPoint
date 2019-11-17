@@ -58,15 +58,21 @@ class StudentController {
     const { email: newEmail } = req.body;
 
     if (newEmail && newEmail !== student.email) {
-      const checkstudent = Student.findOne({ where: { email: newEmail } });
+      const checkstudent = await Student.findOne({
+        where: { email: newEmail },
+      });
       if (checkstudent) {
         return res.status(400).json({ error: 'Email already in use.' });
       }
     }
 
-    const { id, name, email, age, weight, height } = await student.update(
-      req.body
-    );
+    const { id, name, email, age, weight, height } = await student.update({
+      name: req.body.name,
+      email: req.body.email,
+      age: req.body.age,
+      weight: req.body.weight,
+      height: req.body.height,
+    });
 
     return res.json({ id, name, email, age, weight, height });
   }
