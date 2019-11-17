@@ -1,9 +1,8 @@
 import request from 'supertest';
+import factory from '../../factories';
 
-import jwt from 'jsonwebtoken';
 import app from '../../../src/app';
 
-import authConfig from '../../../src/config/auth';
 import auth from '../../../src/app/middlewares/auth';
 
 app.post('/testAuth', auth, (req, res) => {
@@ -21,9 +20,7 @@ describe('Auth Middleware', () => {
   });
 
   it('should be call middleware with a valid token and call next() with userId', async () => {
-    const token = jwt.sign({ id: 123456 }, authConfig.secret, {
-      expiresIn: authConfig.expiresIn,
-    });
+    const token = factory.getValidToken(123456);
     const res = await request(app)
       .post('/testAuth')
       .set('authorization', `Bearer ${token}`)

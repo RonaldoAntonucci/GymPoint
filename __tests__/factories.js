@@ -21,8 +21,11 @@ factory.define('Student', Student, {
   height: faker.random.number({ min: 1, max: 3, precision: 0.01 }),
 });
 
-factory.getValidToken = () => {
-  return jwt.sign({ id: faker.random.number() }, authConfig.secret, {
+factory.getValidToken = id => {
+  if (!id) {
+    id = faker.random.number();
+  }
+  return jwt.sign({ id }, authConfig.secret, {
     expiresIn: authConfig.expiresIn,
   });
 };
