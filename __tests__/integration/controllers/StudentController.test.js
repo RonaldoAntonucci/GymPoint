@@ -11,12 +11,8 @@ describe('Student /store', () => {
     await truncate();
   });
 
-  beforeEach(async () => {
-    const { email, password } = await factory.create('User');
-    const res = await request(app)
-      .post('/sessions')
-      .send({ email, password });
-    token = res.body.token;
+  beforeEach(() => {
+    token = factory.getValidToken();
   });
 
   it('should be able to register new student', async () => {

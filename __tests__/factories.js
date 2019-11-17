@@ -1,8 +1,11 @@
 import faker from 'faker';
 import { factory } from 'factory-girl';
 
+import jwt from 'jsonwebtoken';
 import User from '../src/app/models/User';
 import Student from '../src/app/models/Student';
+
+import authConfig from '../src/config/auth';
 
 factory.define('User', User, {
   name: faker.name.findName(),
@@ -17,5 +20,11 @@ factory.define('Student', Student, {
   weight: faker.random.number({ min: 20, max: 300, precision: 0.01 }),
   height: faker.random.number({ min: 1, max: 3, precision: 0.01 }),
 });
+
+factory.getValidToken = () => {
+  return jwt.sign({ id: faker.random.number() }, authConfig.secret, {
+    expiresIn: authConfig.expiresIn,
+  });
+};
 
 export default factory;
