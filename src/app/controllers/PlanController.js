@@ -38,7 +38,11 @@ class PlanController {
       return res.status(400).json({ error: 'This plan title already in use.' });
     }
 
-    const { id, title, duration, price } = await Plan.create(req.body);
+    const { id, title, duration, price } = await Plan.create({
+      title: req.body.title,
+      duration: req.body.duration,
+      price: req.body.price,
+    });
 
     return res.json({ id, title, duration, price });
   }
