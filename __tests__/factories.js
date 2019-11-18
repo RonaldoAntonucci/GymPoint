@@ -25,7 +25,7 @@ factory.define('Student', Student, {
 
 factory.define('Plan', Plan, {
   title: faker.internet.userName(),
-  duration: faker.random.number({ min: 1, max: 120, precision: 0.01 }),
+  duration: faker.random.number({ min: 1, max: 120 }),
   price: faker.random.number({ min: 0, max: 10000, precision: 0.01 }),
 });
 

@@ -67,7 +67,11 @@ class RegistrationController {
       return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
-    const registration = await Registration.create(req.body);
+    const registration = await Registration.create({
+      student_id,
+      plan_id,
+      start_date: req.body.start_date,
+    });
 
     await Queue.add(RegistrationMail.key, {
       registration,
@@ -77,7 +81,14 @@ class RegistrationController {
 
     const { id, start_date, end_date, price } = registration;
 
-    return res.json({ id, student_id, plan_id, start_date, end_date, price });
+    return res.json({
+      id,
+      student_id,
+      plan_id,
+      start_date: String(start_date),
+      end_date: String(end_date),
+      price,
+    });
   }
 
   async update(req, res) {
