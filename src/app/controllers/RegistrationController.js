@@ -75,9 +75,9 @@ class RegistrationController {
       plan,
     });
 
-    const { start_date, end_date, price } = registration;
+    const { id, start_date, end_date, price } = registration;
 
-    return res.json({ student_id, plan_id, start_date, end_date, price });
+    return res.json({ id, student_id, plan_id, start_date, end_date, price });
   }
 
   async update(req, res) {
