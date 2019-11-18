@@ -77,7 +77,11 @@ class PlanController {
       }
     }
 
-    const { id, title, duration, price } = await plan.update(req.body);
+    const { id, title, duration, price } = await plan.update({
+      title: req.body.title,
+      duration: req.body.duration,
+      price: req.body.price,
+    });
 
     return res.json({ id, title, duration, price });
   }

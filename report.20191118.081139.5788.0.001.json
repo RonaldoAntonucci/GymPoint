@@ -1,0 +1,513 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20191118.081139.5788.0.001.json",
+    "dumpEventTime": "2019-11-18T08:11:39Z",
+    "dumpEventTimeStamp": "1574075499053",
+    "processId": 5788,
+    "cwd": "/home/ronaldo/Rocketseat/gymPoint/server",
+    "commandLine": [
+      "/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node",
+      "/home/ronaldo/Rocketseat/gymPoint/server/node_modules/.bin/jest",
+      "--detectOpenHandles",
+      "--watchAll"
+    ],
+    "nodejsVersion": "v12.13.0",
+    "glibcVersionRuntime": "2.27",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.13.0",
+      "v8": "7.7.299.13-node.12",
+      "uv": "1.32.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "5.0.0-36-generic",
+    "osVersion": "#39~18.04.1-Ubuntu SMP Tue Nov 12 11:09:50 UTC 2019",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3455,
+        "user": 1822400,
+        "nice": 1500,
+        "sys": 318000,
+        "idle": 20371800,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3401,
+        "user": 1779700,
+        "nice": 1600,
+        "sys": 307300,
+        "idle": 20455400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3447,
+        "user": 1749000,
+        "nice": 7400,
+        "sys": 297200,
+        "idle": 20436600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3458,
+        "user": 1715900,
+        "nice": 4900,
+        "sys": 307500,
+        "idle": 20497400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3409,
+        "user": 1458000,
+        "nice": 14600,
+        "sys": 559500,
+        "idle": 20350000,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3461,
+        "user": 1814300,
+        "nice": 2100,
+        "sys": 303800,
+        "idle": 20441100,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3400,
+        "user": 1665900,
+        "nice": 1800,
+        "sys": 309500,
+        "idle": 20584200,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3408,
+        "user": 1622200,
+        "nice": 2500,
+        "sys": 311500,
+        "idle": 20614600,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "enp3s0f1",
+        "internal": false,
+        "mac": "98:29:a6:46:01:6d",
+        "address": "192.168.2.200",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "enp3s0f1",
+        "internal": false,
+        "mac": "98:29:a6:46:01:6d",
+        "address": "fe80::234b:2e00:475c:e9eb",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      }
+    ],
+    "host": "Nitro-5"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b027f5",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000009d9fc3",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b37dbe",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b38139",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ce34f5",
+      "symbol": " [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ce3b86",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cefa1a",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cf0925",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cf3338",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cb9c67",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000fefb9b",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000013725d9",
+      "symbol": " [/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2170089472,
+    "totalCommittedMemory": 2167164608,
+    "usedMemory": 2035561816,
+    "availableMemory": 66899376,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 32568,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 32242888,
+        "capacity": 16759808,
+        "used": 195464,
+        "available": 16564344
+      },
+      "old_space": {
+        "memorySize": 1990832128,
+        "committedMemory": 1989941376,
+        "capacity": 1907472592,
+        "used": 1901852768,
+        "available": 5619824
+      },
+      "code_space": {
+        "memorySize": 15368192,
+        "committedMemory": 14889152,
+        "capacity": 12969824,
+        "used": 12969824,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 113774592,
+        "committedMemory": 113760640,
+        "capacity": 104452720,
+        "used": 104452720,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 16248832,
+        "committedMemory": 16248832,
+        "capacity": 16055192,
+        "used": 16055192,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16759808,
+        "used": 0,
+        "available": 16759808
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 341.197,
+    "kernelCpuSeconds": 24.8055,
+    "cpuConsumptionPercent": 18.9639,
+    "maxRss": 2314399744,
+    "pageFaults": {
+      "IORequired": 7,
+      "IONotRequired": 9923167
+    },
+    "fsActivity": {
+      "reads": 36424,
+      "writes": 191768
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 184.719,
+    "kernelCpuSeconds": 17.5181,
+    "cpuConsumptionPercent": 10.4786,
+    "fsActivity": {
+      "reads": 36424,
+      "writes": 23416
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "npm_package_devDependencies_sqlite3": "^4.1.0",
+    "SPACESHIP_ROOT": "/home/ronaldo/.oh-my-zsh/custom/themes/spaceship-prompt",
+    "USER": "ronaldo",
+    "LANGUAGE": "pt_BR:pt:en",
+    "npm_package_devDependencies_jest": "^24.9.0",
+    "npm_package_dependencies_bcryptjs": "^2.4.3",
+    "npm_package_scripts_pretest": "NODE_ENV=test sequelize db:migrate",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_user_agent": "yarn/1.19.1 npm/? node/v12.13.0 linux x64",
+    "TEXTDOMAIN": "im-config",
+    "XDG_SEAT": "seat0",
+    "npm_config_bin_links": "true",
+    "SSH_AGENT_PID": "2673",
+    "XDG_SESSION_TYPE": "x11",
+    "npm_node_execpath": "/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node",
+    "npm_package_devDependencies_nodemon": "^1.19.3",
+    "npm_package_scripts_dev_debug": "nodemon --inspect src/server.js",
+    "npm_config_init_version": "1.0.0",
+    "SHLVL": "2",
+    "XDG_CACHE_HOME": "/home/ronaldo/snap/code/common/.cache",
+    "npm_package_dependencies_nodemailer_express_handlebars": "^3.1.0",
+    "QT4_IM_MODULE": "xim",
+    "HOME": "/home/ronaldo",
+    "CHROME_DESKTOP": "code-url-handler.desktop",
+    "LESS": "-R",
+    "OLDPWD": "/home/ronaldo/Área de Trabalho/Rocketseat/gymPoint/server",
+    "DESKTOP_SESSION": "ubuntu",
+    "NVM_BIN": "/home/ronaldo/.nvm/versions/node/v12.13.0/bin",
+    "TERM_PROGRAM_VERSION": "1.40.1",
+    "npm_package_devDependencies_faker": "^4.1.0",
+    "npm_package_devDependencies_eslint_config_prettier": "^6.4.0",
+    "GIO_LAUNCHED_DESKTOP_FILE": "/var/lib/snapd/desktop/applications/code_code.desktop",
+    "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+    "ZSH": "/home/ronaldo/.oh-my-zsh",
+    "npm_config_init_license": "MIT",
+    "GNOME_SHELL_SESSION_MODE": "ubuntu",
+    "GTK_MODULES": "gail:atk-bridge",
+    "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+    "PAGER": "less",
+    "YARN_WRAP_OUTPUT": "false",
+    "npm_config_version_tag_prefix": "v",
+    "MANAGERPID": "2500",
+    "npm_package_devDependencies_sucrase": "^3.10.1",
+    "npm_package_scripts_queue": "nodemon src/queue.js",
+    "DBUS_STARTER_BUS_TYPE": "session",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus,guid=629f590dc264747bc1d5395c5dd273ab",
+    "npm_package_dependencies_dotenv": "^8.2.0",
+    "GIO_LAUNCHED_DESKTOP_FILE_PID": "4030",
+    "COLORTERM": "truecolor",
+    "npm_package_scripts_posttest": "NODE_ENV=test sequelize db:migrate:undo:all",
+    "NVM_DIR": "/home/ronaldo/.nvm",
+    "ZPFX": "/home/ronaldo/.zplugin/polaris",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_dependencies_express_async_errors": "^3.1.1",
+    "MANDATORY_PATH": "/usr/share/gconf/ubuntu.mandatory.path",
+    "IM_CONFIG_PHASE": "2",
+    "npm_package_devDependencies_prettier": "^1.18.2",
+    "npm_package_dependencies_pg_hstore": "^2.3.3",
+    "npm_package_scripts_dev": "nodemon src/server.js",
+    "LOGNAME": "ronaldo",
+    "GTK_IM_MODULE": "ibus",
+    "npm_package_devDependencies_eslint_plugin_import": "^2.18.2",
+    "JOURNAL_STREAM": "9:36504",
+    "_": "/usr/bin/yarn",
+    "npm_package_devDependencies__types_jest": "^24.0.23",
+    "npm_package_dependencies_express": "^4.17.1",
+    "DEFAULTS_PATH": "/usr/share/gconf/ubuntu.default.path",
+    "npm_package_dependencies_yup": "^0.27.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "USERNAME": "ronaldo",
+    "XDG_SESSION_ID": "2",
+    "TERM": "xterm-256color",
+    "npm_package_devDependencies_sequelize_cli": "^5.5.1",
+    "GNOME_DESKTOP_SESSION_ID": "this-is-deprecated",
+    "npm_package_scripts_start": "sucrase-node src/server.js",
+    "npm_config_ignore_scripts": "",
+    "WINDOWPATH": "2",
+    "ZSH_CACHE_DIR": "/home/ronaldo/snap/code/common/.cache",
+    "npm_package_dependencies__sentry_node": "5.7.1",
+    "PATH": "/tmp/yarn--1574073568621-0.7469528766148765:/home/ronaldo/Rocketseat/gymPoint/server/node_modules/.bin:/home/ronaldo/.config/yarn/link/node_modules/.bin:/home/ronaldo/.nvm/versions/node/v12.13.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/ronaldo/.nvm/versions/node/v12.13.0/lib/node_modules/npm/bin/node-gyp-bin:/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node_modules/npm/bin/node-gyp-bin:/home/ronaldo/.yarn/bin:/home/ronaldo/.zplugin/polaris/bin:/home/ronaldo/.yarn/bin:/home/ronaldo/.zplugin/polaris/bin:/home/ronaldo/.nvm/versions/node/v12.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ronaldo/Android/Sdk/tools:/home/ronaldo/Android/Sdk/platform-tools:/home/ronaldo/Android/Sdk/tools:/home/ronaldo/Android/Sdk/platform-tools",
+    "NODE": "/home/ronaldo/.nvm/versions/node/v12.13.0/bin/node",
+    "INVOCATION_ID": "baab3ddf09fd4a6eb608dd5ebdc7e144",
+    "SESSION_MANAGER": "local/Nitro-5:@/tmp/.ICE-unix/2577,unix/Nitro-5:/tmp/.ICE-unix/2577",
+    "npm_package_dependencies_redis_mock": "^0.47.0",
+    "npm_package_dependencies_nodemailer": "^6.3.1",
+    "npm_package_name": "gobarber",
+    "XDG_MENU_PREFIX": "gnome-",
+    "BAMF_DESKTOP_FILE_HINT": "/var/lib/snapd/desktop/applications/code_code.desktop",
+    "XDG_RUNTIME_DIR": "/run/user/1000/snap.code",
+    "npm_package_devDependencies_eslint_config_airbnb_base": "^14.0.0",
+    "DISPLAY": ":0",
+    "npm_package_devDependencies__sucrase_jest_plugin": "^2.0.0",
+    "LANG": "pt_BR.UTF-8",
+    "XDG_CURRENT_DESKTOP": "Unity",
+    "npm_package_devDependencies_eslint": "^6.5.1",
+    "npm_package_dependencies_youch": "^2.0.10",
+    "npm_package_dependencies_express_handlebars": "^3.1.0",
+    "XDG_SESSION_DESKTOP": "ubuntu",
+    "XMODIFIERS": "@im=ibus",
+    "XAUTHORITY": "/run/user/1000/gdm/Xauthority",
+    "TERM_PROGRAM": "vscode",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "npm_lifecycle_script": "NODE_ENV=test jest --detectOpenHandles --watchAll",
+    "npm_package_devDependencies_supertest": "^4.0.2",
+    "npm_package_main": "index.js",
+    "SSH_AUTH_SOCK": "/run/user/1000/keyring/ssh",
+    "GSETTINGS_SCHEMA_DIR": "/snap/code/20/usr/share/glib-2.0/schemas",
+    "npm_package_dependencies_sequelize": "^5.19.6",
+    "npm_package_dependencies_bee_queue": "^1.2.2",
+    "npm_package_scripts_test": "NODE_ENV=test jest --detectOpenHandles --watchAll",
+    "npm_config_version_git_message": "v%s",
+    "DISABLE_WAYLAND": "1",
+    "SHELL": "/usr/bin/zsh",
+    "GDK_PIXBUF_MODULEDIR": "/snap/code/20/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders",
+    "npm_lifecycle_event": "test",
+    "npm_package_version": "1.0.0",
+    "QT_ACCESSIBILITY": "1",
+    "GDMSESSION": "ubuntu",
+    "NO_AT_BRIDGE": "1",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}",
+    "npm_package_devDependencies_factory_girl": "^5.0.4",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_git_sign": "",
+    "TEXTDOMAINDIR": "/usr/share/locale/",
+    "GDK_PIXBUF_MODULE_FILE": "/home/ronaldo/snap/code/common/.cache/gdk-pixbuf-loaders.cache",
+    "GPG_AGENT_INFO": "/run/user/1000/gnupg/S.gpg-agent:0:1",
+    "npm_package_license": "MIT",
+    "npm_config_strict_ssl": "true",
+    "XDG_VTNR": "2",
+    "QT_IM_MODULE": "ibus",
+    "SPACESHIP_VERSION": "3.11.2",
+    "npm_package_devDependencies_eslint_plugin_prettier": "^3.1.1",
+    "PWD": "/home/ronaldo/Área de Trabalho/Rocketseat/gymPoint/server",
+    "npm_execpath": "/usr/share/yarn/bin/yarn.js",
+    "CLUTTER_IM_MODULE": "xim",
+    "XDG_DATA_DIRS": "/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop",
+    "DBUS_STARTER_ADDRESS": "unix:path=/run/user/1000/bus,guid=629f590dc264747bc1d5395c5dd273ab",
+    "XDG_CONFIG_DIRS": "/etc/xdg/xdg-ubuntu:/etc/xdg",
+    "ANDROID_HOME": "/home/ronaldo/Android/Sdk",
+    "NVM_CD_FLAGS": "-q",
+    "npm_package_dependencies_date_fns": "^2.0.0-beta.5",
+    "npm_config_save_prefix": "^",
+    "npm_config_ignore_optional": "",
+    "npm_package_dependencies_jsonwebtoken": "^8.5.1",
+    "NODE_ENV": "test",
+    "INIT_CWD": "/home/ronaldo/Rocketseat/gymPoint/server",
+    "npm_package_dependencies_pg": "^7.12.1",
+    "JEST_WORKER_ID": "1"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 16777216,
+      "hard": 16777216
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 4096,
+      "hard": 4096
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 63492,
+      "hard": 63492
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/home/ronaldo/Rocketseat/gymPoint/server/node_modules/sqlite3/lib/binding/node-v72-linux-x64/node_sqlite3.node"
+  ]
+}
