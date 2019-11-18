@@ -92,4 +92,37 @@ describe('Student /update', () => {
     expect(res.body.weight).toBe(320.15);
     expect(res.body.height).toBe(3.45);
   });
+
+  it('should not be able to update student with used email', async () => {
+    const [student, studentInUse] = await Promise.all([
+      factory.create('Student'),
+      factory.create('Student', { email: 'used@email.com' }),
+    ]);
+    const { id } = student;
+    const { email } = studentInUse;
+    const res = await request(app)
+      .put(`/students/${id}`)
+      .set('authorization', `Bearer ${token}`)
+      .send({ email });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Email already in use.');
+  });
+
+  it('should not be able to update student with invalid dates', async () => {
+    const { id } = await factory.create('Student');
+    const res = await request(app)
+      .put(`/students/${id}`)
+      .set('authorization', `Bearer ${token}`)
+      .send({
+        name: 123456,
+        email: 654321,
+        age: 'invalid',
+        weight: 'invalid',
+        height: 'invalid',
+      });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Validation fails');
+  });
 });
