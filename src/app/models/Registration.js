@@ -1,5 +1,11 @@
 import Sequelize, { Model } from 'sequelize';
-import { addMonths, addDays, differenceInDays, isBefore } from 'date-fns';
+import {
+  addMonths,
+  addDays,
+  differenceInDays,
+  isBefore,
+  isAfter,
+} from 'date-fns';
 import Plan from './Plan';
 
 class Registration extends Model {
@@ -10,9 +16,15 @@ class Registration extends Model {
         end_date: Sequelize.DATE,
         price: Sequelize.DOUBLE,
         active: {
-          type: Sequelize.VIRTUAL,
+          type: Sequelize.VIRTUAL(Sequelize.BOOLEAN, [
+            'start_date',
+            'end_date',
+          ]),
           get() {
-            return isBefore(new Date(), this.end_date);
+            return (
+              isBefore(this.get('start_date'), new Date()) &&
+              isAfter(this.get('end_date'), new Date())
+            );
           },
         },
       },
