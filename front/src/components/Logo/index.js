@@ -7,7 +7,7 @@ import logo from '~/assets/gymLogo.svg';
 export default function Logo({ size }) {
   return (
     <Container direction="column">
-      <img src={logo} height={size} alt="GymPoint" />
+      <img src={logo} color="black" height={size} alt="GymPoint" />
       <strong>GYMPOINT</strong>
     </Container>
   );

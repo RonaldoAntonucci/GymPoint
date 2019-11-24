@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   height: 64px;
-  max-width: 900px;
+  max-width: 1308px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -16,17 +16,9 @@ export const Content = styled.div`
   nav {
     display: flex;
     align-items: center;
-
-    img {
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 1px solid #eee;
-    }
-
-    a {
-      font-weight: bold;
-      color: #7159c1;
-    }
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #eee;
   }
 
   aside {
@@ -37,30 +29,47 @@ export const Content = styled.div`
 
 export const Profile = styled.div`
   display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
-  border-left: 1px solid #eee;
+  padding-left: 10px;
 
   div {
     text-align: right;
     margin-right: 10px;
 
     strong {
-      display: block;
-      color: #333;
+      font-size: 14px;
+      color: #666;
     }
 
-    a {
-      display: block;
-      margin-top: 2px;
-      font-size: 12;
-      color: #999;
+    button {
+      margin-top: 5px;
+      background: none;
+      border: 0px;
+      color: #ee4d64;
     }
   }
+`;
 
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+export const Menu = styled.nav`
+  display: flex;
+  width: 100%;
+  height: calc(100% - 20px);
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+    li {
+      margin: 0 20px;
+    }
+  }
+`;
+
+export const MenuButton = styled.button`
+  background: none;
+  border: 0px;
+
+  strong {
+    font-size: 15px;
+    color: #999;
   }
 `;

@@ -1,27 +1,44 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import Notifications from '~/components/Notifications';
-
-import logo from '~/assets/gymLogo.svg';
-import { Container, Content, Profile } from './styles';
+import Logo from '~/components/Logo';
+import { Container, Content, Profile, Menu, MenuButton } from './styles';
 
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
   return (
     <Container>
       <Content>
-        <nav>
-          <img src={logo} alt="GymPoint" height="100%" width="auto" srcSet="" />
-          <Link to="/dashboard">DASHBOARD</Link>
-        </nav>
+        <Logo size={18} />
+        <Menu>
+          <ul>
+            <li>
+              <MenuButton type="button">
+                <strong>ALUNOS</strong>{' '}
+              </MenuButton>
+            </li>
+            <li>
+              <MenuButton type="button">
+                <strong>PLANOS</strong>
+              </MenuButton>
+            </li>
+            <li>
+              <MenuButton type="button">
+                <strong>MATRÍCULAS</strong>
+              </MenuButton>
+            </li>
+            <li>
+              <MenuButton type="button">
+                <strong>PEDIDOS DE AUXÍLIO</strong>
+              </MenuButton>
+            </li>
+          </ul>
+        </Menu>
         <aside>
-          <Notifications />
           <Profile>
             <div>
               <strong>{profile.name}</strong>
-              <Link to="/profile">Meu perfil</Link>
+              <button type="button">sair do sistema</button>
             </div>
           </Profile>
         </aside>

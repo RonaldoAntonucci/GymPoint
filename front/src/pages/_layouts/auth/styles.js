@@ -16,15 +16,13 @@ export const Content = styled.div`
   max-width: 375px;
   text-align: center;
 
-  div {
+  nav {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
 
     strong {
       font-size: 29px;
-      color: #ee4d64;
-      margin-top: 10px;
     }
   }
 
