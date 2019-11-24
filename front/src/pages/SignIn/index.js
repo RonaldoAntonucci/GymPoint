@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
-import logo from '~/assets/gymLogo.svg';
+import Logo from '~/components/Logo';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
@@ -24,10 +24,7 @@ export default function SignIn() {
 
   return (
     <>
-      <div>
-        <img src={logo} height={53} width="auto" alt="GymPoint" />
-        <strong>GYMPOINT</strong>
-      </div>
+      <Logo size={53} />
 
       <Form schema={schema} onSubmit={handleSubmit}>
         <strong>SEU E-MAIL</strong>

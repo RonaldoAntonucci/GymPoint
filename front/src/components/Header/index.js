@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Notifications from '~/components/Notifications';
 
-import logo from '~/assets/logo-purple.svg';
+import logo from '~/assets/gymLogo.svg';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
@@ -13,7 +13,7 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="GoBarber" srcSet="" />
+          <img src={logo} alt="GymPoint" height="100%" width="auto" srcSet="" />
           <Link to="/dashboard">DASHBOARD</Link>
         </nav>
         <aside>
@@ -23,13 +23,6 @@ export default function Header() {
               <strong>{profile.name}</strong>
               <Link to="/profile">Meu perfil</Link>
             </div>
-            <img
-              src={
-                profile.avatar.url ||
-                'https://api.adorable.io/avatars/50/abott@adorable.png'
-              }
-              alt="Ronaldo Antonucci"
-            />
           </Profile>
         </aside>
       </Content>

@@ -15,8 +15,6 @@ export function* signIn({ payload }) {
       password,
     });
 
-    console.log(response);
-
     const { token, user } = response.data;
 
     if (!user.provider) {
@@ -27,7 +25,7 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    history.push('/students');
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
