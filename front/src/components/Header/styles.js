@@ -70,6 +70,6 @@ export const MenuButton = styled.button`
 
   strong {
     font-size: 15px;
-    color: #999;
+    color: ${props => (props.selected ? '#444' : '#999')};
   }
 `;
