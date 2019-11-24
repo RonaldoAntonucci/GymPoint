@@ -7,13 +7,13 @@ import { Container, Content, Profile, Menu, MenuButton } from './styles';
 import { signOut } from '~/store/modules/auth/actions';
 
 export default function Header() {
-  const [selected, setSelected] = useState('ALUNOS');
+  const [selected, setSelected] = useState('students');
   const profile = useSelector(state => state.user.profile);
   const dispatch = useDispatch();
 
-  function handleSignOut() {
+  const handleSignOut = useCallback(() => {
     dispatch(signOut());
-  }
+  }, [dispatch]);
 
   const handleClickMenu = useCallback(
     ({ menu }) => {

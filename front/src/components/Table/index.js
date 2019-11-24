@@ -47,12 +47,12 @@ export default function Table(p) {
     <Mtable
       icons={tableIcons}
       {...p}
-      style={{ padding: '20px', marginTop: '20px' }}
+      style={{ padding: '20px 20px 0px 20px', marginTop: '20px' }}
       options={{
         toolbar: false,
         pageSizeOptions: [],
-        pageSize: 14,
-        maxBodyHeight: 'calc(100vh - 187px)',
+        pageSize: 20,
+        maxBodyHeight: 'calc(100vh - 250px)',
       }}
     />
   );

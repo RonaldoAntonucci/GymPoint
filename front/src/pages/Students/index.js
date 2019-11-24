@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import Table from '~/components/Table';
@@ -23,6 +23,15 @@ export default function Students() {
     }
     loadStudents();
   }, []);
+
+  const handleDelete = useCallback(id => {
+    console.tron.log(id);
+  }, []);
+
+  const handlePage = useCallback(page => {
+    console.tron.log(page);
+  }, []);
+
   return (
     <>
       <Header>
@@ -79,17 +88,23 @@ export default function Students() {
             },
           },
           {
-            render: () => (
+            render: data => (
               <>
                 <Actions>
                   <EditButton type="button">editar</EditButton>
-                  <DeleteButton type="button">apagar</DeleteButton>
+                  <DeleteButton
+                    onClick={() => handleDelete(data.id)}
+                    type="button"
+                  >
+                    apagar
+                  </DeleteButton>
                 </Actions>
               </>
             ),
           },
         ]}
         data={students}
+        onChangePage={handlePage}
       />
     </>
   );
