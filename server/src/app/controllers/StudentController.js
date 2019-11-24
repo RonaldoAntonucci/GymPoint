@@ -9,15 +9,19 @@ class StudentController {
 
     const { q } = req.query;
 
+    const where = q
+      ? {
+          name: {
+            [Op.substring]: q,
+          },
+        }
+      : null;
+
     const student = await Student.findAll({
       limit: limitPage,
       offset: (page - 1) * limitPage,
       order: ['id'],
-      where: {
-        name: {
-          [Op.substring]: q,
-        },
-      },
+      where,
       attributes: ['id', 'name', 'email', 'age'],
     });
 

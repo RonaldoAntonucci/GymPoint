@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
-export const StudentList = styled.ul`
+export const Header = styled.div`
   margin-top: 34px;
-`;
-
-export const Header = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -52,4 +49,26 @@ export const Search = styled.div`
     border: 0px;
     margin-left: 8px;
   }
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  &[edit] {
+    color: #4d85ee;
+  }
+
+  button {
+    background: none;
+    border: 0;
+    margin: 0 18px;
+  }
+`;
+
+export const EditButton = styled.button`
+  color: #4d85ee;
+`;
+
+export const DeleteButton = styled.button`
+  color: #de3b3b;
 `;
