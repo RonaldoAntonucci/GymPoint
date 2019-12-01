@@ -28,6 +28,16 @@ class StudentController {
     return res.json(student);
   }
 
+  async show(req, res) {
+    const { studentId } = req.params;
+
+    const student = await Student.findByPk(studentId, {
+      attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
+    });
+
+    return res.json(student);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),

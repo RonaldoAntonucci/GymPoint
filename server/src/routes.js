@@ -24,6 +24,7 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.get('/students', checkUserAdmin, StudentController.index);
+routes.get('/students/:studentId', checkUserAdmin, StudentController.show);
 routes.post('/students', StudentController.store);
 routes.put('/students/:studentId', checkStudentExist, StudentController.update);
 
@@ -46,6 +47,7 @@ routes.get(
   checkStudentExist,
   HelpOrderController.indexUser
 );
+
 routes.post(
   '/students/:studentId/help-orders',
   checkStudentExist,
