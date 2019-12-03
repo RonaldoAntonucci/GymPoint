@@ -18,6 +18,8 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 
 import { Mtable } from './styles';
 
+console.log(Mtable);
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -53,6 +55,7 @@ export default function Table(p) {
         pageSizeOptions: [],
         pageSize: 20,
         maxBodyHeight: 'calc(100vh - 250px)',
+        emptyRowsWhenPaging: false,
       }}
     />
   );

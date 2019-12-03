@@ -89,7 +89,7 @@ export default function Students() {
   );
 
   const handlePage = useCallback(page => {
-    console.tron.log(page);
+    console.log(page);
   }, []);
 
   const handleAdd = useCallback(() => {
@@ -233,7 +233,6 @@ export default function Students() {
           },
         ]}
         data={students}
-        onChangePage={handlePage}
       />
     </>
   );
