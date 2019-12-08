@@ -16,11 +16,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Sear from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
-import { Mtable } from './styles';
-
-console.log(Mtable);
-
-const tableIcons = {
+export default {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
@@ -43,20 +39,3 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-
-export default function Table(p) {
-  return (
-    <Mtable
-      icons={tableIcons}
-      {...p}
-      style={{ padding: '20px 20px 0px 20px', marginTop: '20px' }}
-      options={{
-        toolbar: false,
-        pageSizeOptions: [],
-        pageSize: 20,
-        maxBodyHeight: 'calc(100vh - 250px)',
-        emptyRowsWhenPaging: false,
-      }}
-    />
-  );
-}

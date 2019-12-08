@@ -17,15 +17,20 @@ class StudentController {
         }
       : null;
 
-    const student = await Student.findAll({
-      limit: limitPage,
-      offset: (page - 1) * limitPage,
-      order: ['id'],
-      where,
-      attributes: ['id', 'name', 'email', 'age'],
-    });
+    const [total, students] = await Promise.all([
+      await Student.count(),
+      await Student.findAll({
+        limit: limitPage,
+        offset: (page - 1) * limitPage,
+        order: ['id'],
+        where,
+        attributes: ['id', 'name', 'email', 'age'],
+      }),
+    ]);
 
-    return res.json(student);
+    const lastPage = Math.trunc(total / limitPage + 1);
+
+    return res.json({ students, lastPage });
   }
 
   async show(req, res) {
