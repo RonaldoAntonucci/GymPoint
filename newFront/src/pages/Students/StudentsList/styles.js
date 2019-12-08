@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+
+import palette from '~/styles/palette';
+
+import StyledButton from '~/components/Button';
 
 export const Container = styled.div`
   width: 100%;
@@ -8,57 +11,20 @@ export const Container = styled.div`
   align-self: center;
 `;
 
-export const Title = styled.div`
+export const Options = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-transform: uppercase;
-  color: #444;
-
-  div {
-    display: flex;
-    align-items: center;
-
-    button {
-      margin-right: 16px;
-    }
-  }
-`;
-
-export const Button = styled.button`
-  background: #ee4d64;
-  height: 44px;
-  border: 0;
-  color: #fff;
-  border-radius: 4px;
-  display: flex;
+  flex-basis: auto;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 
-  padding: 8px;
-
-  &:hover {
-    background: ${props => darken(0.03, '#de3b3b')};
+  input {
+    margin-left: 20px;
   }
+`;
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      color: #fff;
-      font-size: 20px;
-    }
-  }
-
-  span {
-    color: #fff;
-    flex: 1;
-    text-align: center;
-    font-size: 16px;
-    line-height: 19px;
-    font-weight: bold;
-    margin: 0 12px;
-  }
+export const Button = styled(StyledButton).attrs(() => ({
+  color: palette.primary,
+}))`
+  color: ${palette.white};
 `;

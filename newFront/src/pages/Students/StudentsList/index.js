@@ -1,37 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Form } from '@rocketseat/unform';
 
+import Title from '~/components/Title';
 import Input from '~/components/Input';
 
-import { Container, Title, Button } from './styles';
+import { Container, Options, Button } from './styles';
 
 export default function StudentsList() {
   return (
     <Container>
       <Title>
-        <h1>Lista de alunos</h1>
+        <h1>Gerenciando alunos</h1>
 
-        <div>
+        <Options>
           <Link to="/students/create">
-            <Button>
-              <div>
-                <MdAdd />
-              </div>
-              <span>CADASTRAR</span>
-            </Button>
+            <Button ico={MdAdd} text="CADASTRAR" type="button" />
           </Link>
           <Form onSubmit={() => {}}>
             <Input
               type="text"
               name="search"
               placeholder="Pesquisar por alunos"
+              ico={MdSearch}
             />
           </Form>
-        </div>
+        </Options>
       </Title>
     </Container>
   );
