@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 
@@ -10,6 +9,8 @@ import Title from '~/components/Title';
 import Input from '~/components/Input';
 import Content from '~/components/Content';
 import Table from '~/components/Table';
+
+import palette from '~/styles/palette';
 
 import { Container, Options, Button } from './styles';
 
@@ -31,6 +32,14 @@ export default function StudentsList() {
       console.log('error');
     }
   }, [lastPage, page]);
+
+  const getStudent = useCallback(id => {
+    console.log(id);
+  }, []);
+
+  const deleteStudent = useCallback(id => {
+    console.log(id);
+  }, []);
 
   useEffect(() => {
     loadStudents();
@@ -63,6 +72,20 @@ export default function StudentsList() {
       }
     },
     [lastPage, page]
+  );
+
+  const handleEdit = useCallback(
+    id => {
+      getStudent(id);
+    },
+    [getStudent]
+  );
+
+  const handleDelete = useCallback(
+    id => {
+      deleteStudent(id);
+    },
+    [deleteStudent]
   );
 
   return (
@@ -127,6 +150,18 @@ export default function StudentsList() {
           ]}
           data={students}
           pagination={{ handlePage, lastPage }}
+          action={[
+            {
+              text: 'editar',
+              onClick: handleEdit,
+              color: palette.info,
+            },
+            {
+              text: 'apagar',
+              onClick: handleDelete,
+              color: palette.primary,
+            },
+          ]}
         />
       </Content>
     </Container>

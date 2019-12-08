@@ -36,14 +36,8 @@ export default function Pagination({ handlePage, lastPage }) {
         <button type="button" onClick={handlePreviousPage}>
           Anterior
         </button>
-        <StyledForm onSubmit={handleInput}>
-          <StyledInput
-            placeholder={1}
-            type="number"
-            name="page"
-            min={1}
-            max={lastPage}
-          />
+        <StyledForm onSubmit={handleInput} initialData={{ page: 1 }}>
+          <StyledInput type="number" name="page" min={1} max={lastPage} />
         </StyledForm>
 
         <button type="button" onClick={handleNextPage}>

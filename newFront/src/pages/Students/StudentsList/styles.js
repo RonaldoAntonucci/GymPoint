@@ -7,8 +7,9 @@ import StyledButton from '~/components/Button';
 export const Container = styled.div`
   width: 100%;
   max-width: 1200px;
-  margin: 30px auto;
+  margin: auto;
   align-self: center;
+  margin-top: 30px;
 `;
 
 export const Options = styled.div`
