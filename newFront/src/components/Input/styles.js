@@ -23,7 +23,7 @@ export const Container = styled.div`
     border-radius: 4px;
     height: 44px;
     padding: 0 15px;
-    color: #444;
+    color: ${palette.dark};
     width: 100%;
 
     &::placeholder {

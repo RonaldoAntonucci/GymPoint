@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Logo from '~/components/Logo';
-import { Container, Content, Profile, Menu, MenuButton } from './styles';
+import { Container, Content, Logo, Profile, Menu, MenuButton } from './styles';
 
 import { signOut } from '~/store/modules/auth/actions';
 
@@ -27,7 +26,7 @@ export default function Header() {
   return (
     <Container>
       <Content>
-        <Logo size={18} />
+        <Logo />
         <Menu>
           <ul>
             <li>
@@ -68,16 +67,12 @@ export default function Header() {
             </li>
           </ul>
         </Menu>
-        <aside>
-          <Profile>
-            <div>
-              <strong>{profile.name}</strong>
-              <button type="button" onClick={handleSignOut}>
-                sair do sistema
-              </button>
-            </div>
-          </Profile>
-        </aside>
+        <Profile>
+          <strong>{profile.name}</strong>
+          <button type="button" onClick={handleSignOut}>
+            sair do sistema
+          </button>
+        </Profile>
       </Content>
     </Container>
   );

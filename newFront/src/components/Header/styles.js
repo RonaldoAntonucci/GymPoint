@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
+import palette from '~/styles/palette';
+
+import GymLogo from '~/components/Logo';
+
 export const Container = styled.div`
-  background: #fff;
-  padding: 0 30px;
+  background: ${palette.white};
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid ${palette.lightGrey};
 `;
 
 export const Content = styled.div`
@@ -10,49 +15,28 @@ export const Content = styled.div`
   max-width: 1308px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  padding: 10px 0px;
 
   nav {
     display: flex;
     align-items: center;
-    margin-right: 20px;
-    padding-right: 20px;
-    border-right: 1px solid #eee;
-  }
-
-  aside {
-    display: flex;
-    align-items: center;
+    border-left: 1px solid ${palette.lightGrey};
   }
 `;
 
-export const Profile = styled.div`
-  display: flex;
-  padding-left: 10px;
-
-  div {
-    text-align: right;
-    margin-right: 10px;
-
-    strong {
-      font-size: 14px;
-      color: #666;
-    }
-
-    button {
-      margin-top: 5px;
-      background: none;
-      border: 0px;
-      color: #ee4d64;
-    }
-  }
+export const Logo = styled(GymLogo).attrs(() => ({
+  size: 24,
+}))`
+  flex-direction: row;
+  margin: 20px;
+  font-size: 18px;
 `;
 
 export const Menu = styled.nav`
   display: flex;
-  width: 100%;
-  height: calc(100% - 20px);
+  height: 100%;
+  flex: 1;
   ul {
     list-style: none;
     display: flex;
@@ -70,6 +54,30 @@ export const MenuButton = styled.button`
 
   strong {
     font-size: 15px;
-    color: ${props => (props.selected ? '#444' : '#999')};
+    color: ${props => (props.selected ? palette.dark : palette.darkGrey)};
+  }
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+  width: 150px;
+
+  text-align: right;
+  margin-right: 10px;
+
+  strong {
+    font-size: 14px;
+    color: ${palette.dark};
+  }
+
+  button {
+    margin-top: 5px;
+    background: none;
+    border: 0px;
+    color: ${palette.primary};
   }
 `;
