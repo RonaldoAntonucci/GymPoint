@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { darken } from 'polished';
 
-export const Container = styled.div`
+export const Container = styled.button`
   display: flex;
   background-color: ${props => props.color};
   border: 0;

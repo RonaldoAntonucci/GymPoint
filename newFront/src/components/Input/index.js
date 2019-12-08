@@ -10,12 +10,21 @@ export default function newInput({
   placeholder,
   label,
   ico,
+  min,
+  max,
   ...rest
 }) {
   return (
     <Container withIco={!!ico} {...rest}>
       {ico && <IcoContent>{ico()}</IcoContent>}
-      <Input name={name} type={type} placeholder={placeholder} label={label} />
+      <Input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        label={label}
+        min={min}
+        max={max}
+      />
     </Container>
   );
 }
@@ -26,6 +35,8 @@ newInput.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   ico: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  min: PropTypes.number,
+  max: PropTypes.number,
 };
 
 newInput.defaultProps = {
@@ -33,4 +44,6 @@ newInput.defaultProps = {
   type: 'text',
   placeholder: '',
   ico: null,
+  min: null,
+  max: null,
 };

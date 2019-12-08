@@ -5,7 +5,6 @@ export default styled.div`
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin-right: 20px;
 
   > div {
     display: flex;
