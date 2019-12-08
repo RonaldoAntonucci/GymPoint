@@ -20,18 +20,26 @@ export default function StudentsList() {
   const [students, setStudents] = useState([]);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const loadStudents = useCallback(async () => {
-    try {
-      const response = await api.get(`/students?page=${page}`);
-      setStudents(response.data.students);
-      if (lastPage !== response.data.lastPage) {
-        setLastPage(response.data.lastPage);
+  const loadStudents = useCallback(
+    async filter => {
+      setLoading(true);
+      try {
+        const q = filter ? `&q=${filter}` : '';
+        if (filter) setPage(1);
+        const response = await api.get(`/students?page=${page}${q}`);
+        setStudents(response.data.students);
+        if (lastPage !== response.data.lastPage) {
+          setLastPage(response.data.lastPage);
+        }
+      } catch {
+        console.log('error');
       }
-    } catch {
-      console.log('error');
-    }
-  }, [lastPage, page]);
+      setLoading(false);
+    },
+    [lastPage, page]
+  );
 
   const getStudent = useCallback(id => {
     console.log(id);
@@ -45,25 +53,32 @@ export default function StudentsList() {
     loadStudents();
   }, [loadStudents, page]);
 
+  const handleSearch = useCallback(
+    data => {
+      loadStudents(data.search);
+    },
+    [loadStudents]
+  );
+
   const handlePage = useCallback(
     paginate => {
       switch (paginate) {
         case null:
           break;
         case 'next': {
-          setPage(page + 1);
+          if (page < lastPage) setPage(page + 1);
           break;
         }
         case 'previous': {
-          setPage(page - 1);
+          if (page > 1) setPage(page - 1);
           break;
         }
         case 'first': {
-          setPage(1);
+          if (page !== 1) setPage(1);
           break;
         }
         case 'last': {
-          setPage(lastPage);
+          if (page !== lastPage) setPage(lastPage);
           break;
         }
         default: {
@@ -97,7 +112,7 @@ export default function StudentsList() {
           <Link to="/students/create">
             <Button ico={MdAdd} text="CADASTRAR" type="button" />
           </Link>
-          <Form onSubmit={() => {}}>
+          <Form onSubmit={handleSearch}>
             <Input
               type="text"
               name="search"
@@ -109,6 +124,7 @@ export default function StudentsList() {
       </Title>
       <Content>
         <Table
+          isLoading={loading}
           columns={[
             {
               title: 'NOME',
@@ -149,7 +165,7 @@ export default function StudentsList() {
             },
           ]}
           data={students}
-          pagination={{ handlePage, lastPage }}
+          pagination={{ handlePage, lastPage, page }}
           action={[
             {
               text: 'editar',

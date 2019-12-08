@@ -6,26 +6,28 @@ import Pagination from './Pagination';
 
 export default function Table({ pagination, columns, action, ...rest }) {
   const act = useMemo(() => {
-    return {
-      render: data => (
-        <Actions>
-          {action.map(a => (
-            <ActionButton
-              key={a.text}
-              color={a.color}
-              type="button"
-              onClick={() => a.onClick(data.id)}
-            >
-              {a.text}
-            </ActionButton>
-          ))}
-        </Actions>
-      ),
-    };
+    return action
+      ? {
+          render: data => (
+            <Actions>
+              {action.map(a => (
+                <ActionButton
+                  key={a.text}
+                  color={a.color}
+                  type="button"
+                  onClick={() => a.onClick(data.id)}
+                >
+                  {a.text}
+                </ActionButton>
+              ))}
+            </Actions>
+          ),
+        }
+      : null;
   }, [action]);
 
   useMemo(() => {
-    columns.push(act);
+    if (act) columns.push(act);
   }, [act, columns]);
 
   return (

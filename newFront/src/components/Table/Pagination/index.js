@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Pag, StyledForm, StyledInput } from './styles';
 
-export default function Pagination({ handlePage, lastPage }) {
+export default function Pagination({ page, handlePage, lastPage }) {
   const handleNextPage = useCallback(() => {
     handlePage('next');
   }, [handlePage]);
@@ -36,7 +36,7 @@ export default function Pagination({ handlePage, lastPage }) {
         <button type="button" onClick={handlePreviousPage}>
           Anterior
         </button>
-        <StyledForm onSubmit={handleInput} initialData={{ page: 1 }}>
+        <StyledForm onSubmit={handleInput} initialData={{ page }}>
           <StyledInput type="number" name="page" min={1} max={lastPage} />
         </StyledForm>
 
@@ -54,8 +54,10 @@ export default function Pagination({ handlePage, lastPage }) {
 Pagination.propTypes = {
   lastPage: PropTypes.number,
   handlePage: PropTypes.func.isRequired,
+  page: PropTypes.number,
 };
 
 Pagination.defaultProps = {
   lastPage: 1,
+  page: 1,
 };
