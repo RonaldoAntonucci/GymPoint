@@ -11,23 +11,17 @@ import Input from '~/components/Input';
 import Content from '~/components/Content';
 import Table from '~/components/Table';
 
-import { updatePage } from '~/store/modules/students/actions';
-
 import { Container, Options, Button } from './styles';
 
 import api from '~/services/api';
 
 export default function StudentsList() {
-  const dispatch = useDispatch();
-  const page = useSelector(state => state.students.page);
-
   const [students, setStudents] = useState([]);
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
   const loadStudents = useCallback(async () => {
     try {
-      console.log(page);
       const response = await api.get(`/students?page=${page}`);
       setStudents(response.data.students);
       if (lastPage !== response.data.lastPage) {
@@ -48,27 +42,27 @@ export default function StudentsList() {
         case null:
           break;
         case 'next': {
-          dispatch(updatePage(page + 1));
+          setPage(page + 1);
           break;
         }
         case 'previous': {
-          dispatch(updatePage(page - 1));
+          setPage(page - 1);
           break;
         }
         case 'first': {
-          dispatch(updatePage(1));
+          setPage(1);
           break;
         }
         case 'last': {
-          dispatch(updatePage(lastPage));
+          setPage(lastPage);
           break;
         }
         default: {
-          dispatch(updatePage(paginate));
+          setPage(paginate);
         }
       }
     },
-    [dispatch, lastPage, page]
+    [lastPage, page]
   );
 
   return (
