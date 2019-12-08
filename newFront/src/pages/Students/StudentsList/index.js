@@ -5,6 +5,7 @@ import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Form } from '@rocketseat/unform';
 
+import Container from '~/components/Container';
 import Title from '~/components/Title';
 import Input from '~/components/Input';
 import Content from '~/components/Content';
@@ -12,7 +13,7 @@ import Table from '~/components/Table';
 
 import palette from '~/styles/palette';
 
-import { Container, Options, Button } from './styles';
+import { Options, Button } from './styles';
 
 import api from '~/services/api';
 

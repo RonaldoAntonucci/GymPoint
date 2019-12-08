@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import Table from '~/components/Table';
-import Formulario from '~/components/Formulario';
+import Formulario from '~/components/Formulario2';
 import Header2 from '~/components/Header2';
 import api from '~/services/api';
 

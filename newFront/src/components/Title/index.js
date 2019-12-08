@@ -6,4 +6,12 @@ export default styled.div`
   justify-content: space-between;
   flex: 1;
   margin-right: 20px;
+
+  > div {
+    display: flex;
+    flex-basis: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 `;
