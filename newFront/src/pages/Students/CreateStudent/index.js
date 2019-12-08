@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
+import PropTypes from 'prop-types';
 import history from '~/services/history';
 
 import Container from '~/components/Container';
@@ -16,18 +17,22 @@ import { Button } from './styles';
 
 import api from '~/services/api';
 
-export default function CreateStudent() {
+export default function CreateStudent({ match }) {
+  const id = match.params;
   const [loading, setLoading] = useState(true);
-  const createStudent = useCallback(async data => {
+  const [student, setStudent] = useState({});
+  const createStudent = useCallback(async (data, studentId) => {
     setLoading(true);
     try {
+      const method = studentId ? api.put : api.post;
+      const complement = studentId ? `/${studentId}` : '';
       const { name, email, age, weight, height } = data;
-      await api.post('/students', {
+      await method(`/students${complement}`, {
         name,
         email,
         age,
-        weight,
-        height,
+        weight: weight / 100,
+        height: height / 100,
       });
 
       history.push('/students');
@@ -37,11 +42,31 @@ export default function CreateStudent() {
     setLoading(false);
   }, []);
 
+  const loadStudent = useCallback(async studentId => {
+    setLoading(true);
+    try {
+      const response = await api.get(`/students/${studentId}`);
+      const data = {
+        ...response.data,
+        weight: response.data.weight * 100,
+        height: response.data.height * 100,
+      };
+      setStudent(data);
+    } catch {
+      console.log('error');
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (id.id) loadStudent(id.id);
+  }, [id, loadStudent]);
+
   const handleSubmit = useCallback(
     data => {
-      createStudent(data);
+      createStudent(data, id.id);
     },
-    [createStudent]
+    [createStudent, id]
   );
   return (
     <Container>
@@ -49,10 +74,10 @@ export default function CreateStudent() {
         <Form
           schema={schema}
           onSubmit={handleSubmit}
-          initialData={{ age: 0, weight: 0, height: 0 }}
+          initialData={Object.entries(student).length !== 0 ? student : null}
         >
           <Title>
-            <h1>Cadastro de aluno</h1>
+            <h1>{id ? 'Edição de aluno' : 'Cadastro de aluno'}</h1>
             <div>
               <Link to="/students">
                 <Button
@@ -89,11 +114,37 @@ export default function CreateStudent() {
           </FormRow>
           <FormRow>
             <FormInput name="age" type="number" label="IDADE" min={0} />
-            <FormInput name="weight" type="number" label="PESO" min={0} />
-            <FormInput name="height" type="number" label="ALTURA" min={0} />
+            <FormInput
+              name="weight"
+              type="number"
+              label="PESO (EM GRAMAS)"
+              min={0}
+            />
+            <FormInput
+              name="height"
+              type="number"
+              label="ALTURA (EM CM)"
+              min={0}
+            />
           </FormRow>
         </Form>
       </Content>
     </Container>
   );
 }
+
+CreateStudent.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};
+
+CreateStudent.defaultProps = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: null,
+    }),
+  }),
+};

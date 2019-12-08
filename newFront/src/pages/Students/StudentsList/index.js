@@ -42,10 +42,6 @@ export default function StudentsList() {
     [lastPage, page]
   );
 
-  const getStudent = useCallback(id => {
-    console.log(id);
-  }, []);
-
   const deleteStudent = useCallback(id => {
     console.log(id);
   }, []);
@@ -88,13 +84,6 @@ export default function StudentsList() {
       }
     },
     [lastPage, page]
-  );
-
-  const handleEdit = useCallback(
-    id => {
-      getStudent(id);
-    },
-    [getStudent]
   );
 
   const handleDelete = useCallback(
@@ -169,9 +158,10 @@ export default function StudentsList() {
           pagination={{ handlePage, lastPage, page }}
           action={[
             {
+              link: '/students',
               text: 'editar',
-              onClick: handleEdit,
               color: palette.info,
+              onClick: () => {},
             },
             {
               text: 'apagar',
