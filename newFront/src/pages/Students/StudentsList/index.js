@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 
@@ -10,6 +12,7 @@ import Container from '~/components/Container';
 import Input from '~/components/Input';
 import Content from '~/components/Content';
 import Table from '~/components/Table';
+import Confirm from '~/components/Confirm';
 
 import palette from '~/styles/palette';
 
@@ -35,7 +38,7 @@ export default function StudentsList() {
           setLastPage(response.data.lastPage);
         }
       } catch {
-        console.log('error');
+        toast.error('Não foi possível carregar os alunos.');
       }
       setLoading(false);
     },
@@ -88,7 +91,19 @@ export default function StudentsList() {
 
   const handleDelete = useCallback(
     id => {
-      deleteStudent(id);
+      confirmAlert({
+        customUI: (
+          { onClose } // eslint-disable-line
+        ) => (
+          <Confirm
+            callback={() => deleteStudent(id)}
+            onClose={onClose}
+            title="Deseja excluir este aluno?"
+            message="Se confirmar, o aluno será deletado. Isso é irreversível. Deseja
+                mesmo excluí-lo?"
+          />
+        ),
+      });
     },
     [deleteStudent]
   );

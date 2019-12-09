@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import history from '~/services/history';
 
 import Container from '~/components/Container';
@@ -35,9 +36,13 @@ export default function CreateStudent({ match }) {
         height: height / 100,
       });
 
+      toast.success(
+        `Usuário ${studentId ? 'editado' : 'cadastrado'} com sucesso.`
+      );
+
       history.push('/students');
     } catch {
-      console.log('error');
+      toast.error('Não foi possível salvar este aluno.');
     }
     setLoading(false);
   }, []);
@@ -53,7 +58,7 @@ export default function CreateStudent({ match }) {
       };
       setStudent(data);
     } catch {
-      console.log('error');
+      toast.error('Não foi possível carregar este aluno');
     }
     setLoading(false);
   }, []);
