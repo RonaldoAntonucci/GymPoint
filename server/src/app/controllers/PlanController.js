@@ -5,16 +5,21 @@ import Plan from '../models/Plan';
 class PlanController {
   async index(req, res) {
     const { page = 1 } = req.query;
-    const pageLimit = process.env.PAGE_LIMIT;
+    const limitPage = process.env.PAGE_LIMIT;
 
-    const plans = await Plan.findAll({
-      order: [['updated_at', 'DESC']],
-      limit: pageLimit,
-      offset: (page - 1) * pageLimit,
-      attributes: ['id', 'title', 'duration', 'price'],
-    });
+    const [total, plans] = await Promise.all([
+      Plan.count(),
+      await Plan.findAll({
+        order: [['updated_at', 'DESC']],
+        limit: limitPage,
+        offset: (page - 1) * limitPage,
+        attributes: ['id', 'title', 'duration', 'price'],
+      }),
+    ]);
 
-    return res.json(plans);
+    const lastPage = Math.trunc(total / limitPage + 1);
+
+    return res.json({ plans, lastPage });
   }
 
   async store(req, res) {

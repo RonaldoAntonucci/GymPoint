@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Container, Content, Logo, Profile, Menu, MenuButton } from './styles';
 
@@ -30,22 +31,26 @@ export default function Header() {
         <Menu>
           <ul>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'students' })}
-                selected={selected === 'students'}
-              >
-                <strong>ALUNOS</strong>{' '}
-              </MenuButton>
+              <Link to="/students">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'students' })}
+                  selected={selected === 'students'}
+                >
+                  <strong>ALUNOS</strong>{' '}
+                </MenuButton>
+              </Link>
             </li>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'plans' })}
-                selected={selected === 'plans'}
-              >
-                <strong>PLANOS</strong>
-              </MenuButton>
+              <Link to="/plans">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'plans' })}
+                  selected={selected === 'plans'}
+                >
+                  <strong>PLANOS</strong>
+                </MenuButton>
+              </Link>
             </li>
             <li>
               <MenuButton
