@@ -62,6 +62,7 @@ routes.post(
 );
 
 routes.get('/plans', checkUserAdmin, PlanController.index);
+routes.get('/plans/:planId', checkUserAdmin, PlanController.show);
 routes.post('/plans', checkUserAdmin, PlanController.store);
 routes.put('/plans/:planId', checkUserAdmin, PlanController.update);
 routes.delete('/plans/:planId', checkUserAdmin, PlanController.delete);

@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
+import palette from '~/styles/palette';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
 
   label {
     margin-bottom: 8px;
@@ -11,23 +14,22 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: flex-start;
     font-weight: bold;
-    color: #444;
+    color: ${palette.dark};
     font-size: 14px;
     line-height: 16px;
   }
 
   input {
-    border: 2px solid #ddd;
+    border: 2px solid ${palette.grey};
     border-radius: 4px;
     height: 44px;
-    padding: 0 15px;
-    color: #444;
+    padding: ${props => (props.withIco ? '0 15px 0 30px' : '0 15px')};
+    color: ${palette.dark};
     width: 100%;
 
     &::placeholder {
-      color: #ddd;
+      color: ${palette.grey};
       height: 19px;
-      margin: 0 0 10px;
       font-size: 16px;
       line-height: 19px;
     }
@@ -35,8 +37,19 @@ export const Container = styled.div`
 
   span {
     margin-top: 8px;
-    color: #ee4d64;
+    color: ${palette.primary};
     align-self: flex-start;
     font-weight: bold;
+  }
+`;
+
+export const IcoContent = styled.div`
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 13px;
+
+  > svg {
+    font-size: 18px;
+    color: ${palette.darkGrey};
   }
 `;

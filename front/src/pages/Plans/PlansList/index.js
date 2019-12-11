@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 
-import { MdAdd, MdSearch } from 'react-icons/md';
-
-import { Form } from '@rocketseat/unform';
+import { MdAdd } from 'react-icons/md';
 
 import Container from '~/components/Container';
-import Input from '~/components/Input';
 import Content from '~/components/Content';
 import Table from '~/components/Table';
 import Confirm from '~/components/Confirm';
@@ -19,45 +16,27 @@ import { Options, Button, Title } from './styles';
 
 import api from '~/services/api';
 
-export default function StudentsList() {
-  const [students, setStudents] = useState([]);
+export default function PlansList() {
+  const [loading, setLoading] = useState(true);
+  const [plans, setPlans] = useState([]);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [loading, setLoading] = useState(true);
 
-  const loadStudents = useCallback(
-    async filter => {
-      setLoading(true);
-      try {
-        const q = filter ? `&q=${filter}` : '';
-        if (filter) setPage(1);
-        const response = await api.get(`/students?page=${page}${q}`);
-        setStudents(response.data.students);
-        if (lastPage !== response.data.lastPage) {
-          setLastPage(response.data.lastPage);
-        }
-      } catch {
-        toast.error('Não foi possível carregar os alunos.');
-      }
-      setLoading(false);
-    },
-    [lastPage, page]
-  );
-
-  const deleteStudent = useCallback(id => {
-    console.log(id);
+  const loadPlans = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await api.get('/plans');
+      setPlans(data.plans);
+      setLastPage(data.lastPage);
+    } catch {
+      toast.error('Não foi possível carregar os planos.');
+    }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
-    loadStudents();
-  }, [loadStudents, page]);
-
-  const handleSearch = useCallback(
-    data => {
-      loadStudents(data.search);
-    },
-    [loadStudents]
-  );
+    loadPlans();
+  }, [loadPlans, page]);
 
   const handlePage = useCallback(
     paginate => {
@@ -88,6 +67,10 @@ export default function StudentsList() {
     [lastPage, page]
   );
 
+  const deletePlan = useCallback(id => {
+    console.log(id);
+  }, []);
+
   const handleDelete = useCallback(
     id => {
       confirmAlert({
@@ -95,7 +78,7 @@ export default function StudentsList() {
           { onClose } // eslint-disable-line
         ) => (
           <Confirm
-            callback={() => deleteStudent(id)}
+            callback={() => deletePlan(id)}
             onClose={onClose}
             title="Deseja excluir este aluno?"
             message="Se confirmar, o aluno será deletado. Isso é irreversível. Deseja
@@ -104,35 +87,27 @@ export default function StudentsList() {
         ),
       });
     },
-    [deleteStudent]
+    [deletePlan]
   );
 
   return (
     <Container>
       <Title>
-        <h1>Gerenciando alunos</h1>
-
+        <h1>Gerenciando Planos</h1>
         <Options>
-          <Link to="/students/create">
+          <Link to="/plans/create">
             <Button ico={MdAdd} text="CADASTRAR" type="button" />
           </Link>
-          <Form onSubmit={handleSearch}>
-            <Input
-              type="text"
-              name="search"
-              placeholder="Pesquisar por alunos"
-              ico={MdSearch}
-            />
-          </Form>
         </Options>
       </Title>
       <Content>
         <Table
           isLoading={loading}
+          data={plans}
           columns={[
             {
-              title: 'NOME',
-              field: 'name',
+              title: 'TÍTULO',
+              field: 'title',
               headerStyle: {
                 fontWeight: 'bold',
                 fontSize: '19px',
@@ -143,8 +118,8 @@ export default function StudentsList() {
               },
             },
             {
-              title: 'E-MAIL',
-              field: 'email',
+              title: 'DURAÇÃO',
+              field: 'duration',
               headerStyle: {
                 fontWeight: 'bold',
                 fontSize: '19px',
@@ -155,9 +130,8 @@ export default function StudentsList() {
               },
             },
             {
-              title: 'IDADE',
-              field: 'age',
-              type: 'numeric',
+              title: 'VALOR p/MÊS',
+              field: 'price',
               headerStyle: {
                 fontWeight: 'bold',
                 fontSize: '19px',
@@ -168,11 +142,10 @@ export default function StudentsList() {
               },
             },
           ]}
-          data={students}
           pagination={{ handlePage, lastPage, page }}
           action={[
             {
-              link: '/students',
+              link: '/plans',
               text: 'editar',
               color: palette.info,
               onClick: () => {},

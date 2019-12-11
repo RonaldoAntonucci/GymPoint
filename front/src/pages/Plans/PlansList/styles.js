@@ -17,6 +17,4 @@ export const Button = styled(StyledButton).attrs(() => ({
   color: ${palette.white};
 `;
 
-export const Title = styled(StyledTitle)`
-  margin-right: 20px;
-`;
+export const Title = styled(StyledTitle)``;

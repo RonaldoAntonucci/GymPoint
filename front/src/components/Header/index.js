@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import Logo from '~/components/Logo';
-import { Container, Content, Profile, Menu, MenuButton } from './styles';
+import { Container, Content, Logo, Profile, Menu, MenuButton } from './styles';
 
 import { signOut } from '~/store/modules/auth/actions';
 
@@ -27,26 +27,30 @@ export default function Header() {
   return (
     <Container>
       <Content>
-        <Logo size={18} />
+        <Logo />
         <Menu>
           <ul>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'students' })}
-                selected={selected === 'students'}
-              >
-                <strong>ALUNOS</strong>{' '}
-              </MenuButton>
+              <Link to="/students">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'students' })}
+                  selected={selected === 'students'}
+                >
+                  <strong>ALUNOS</strong>{' '}
+                </MenuButton>
+              </Link>
             </li>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'plans' })}
-                selected={selected === 'plans'}
-              >
-                <strong>PLANOS</strong>
-              </MenuButton>
+              <Link to="/plans">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'plans' })}
+                  selected={selected === 'plans'}
+                >
+                  <strong>PLANOS</strong>
+                </MenuButton>
+              </Link>
             </li>
             <li>
               <MenuButton
@@ -68,16 +72,12 @@ export default function Header() {
             </li>
           </ul>
         </Menu>
-        <aside>
-          <Profile>
-            <div>
-              <strong>{profile.name}</strong>
-              <button type="button" onClick={handleSignOut}>
-                sair do sistema
-              </button>
-            </div>
-          </Profile>
-        </aside>
+        <Profile>
+          <strong>{profile.name}</strong>
+          <button type="button" onClick={handleSignOut}>
+            sair do sistema
+          </button>
+        </Profile>
       </Content>
     </Container>
   );
