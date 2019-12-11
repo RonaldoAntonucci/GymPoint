@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import logo from '~/assets/gymLogo.svg';
 
-export default function Logo({ size, ...rest }) {
+function Logo({ size, ...rest }) {
   return (
     <Container direction="column" {...rest}>
       <img src={logo} height={size} alt="GymPoint" />
@@ -20,3 +20,5 @@ Logo.propTypes = {
 Logo.defaultProps = {
   size: 50,
 };
+
+export default Logo;

@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 import palette from '~/styles/palette';
 
-export default function Confirm({ callback, onClose, title, message }) {
+function Confirm({ callback, onClose, title, message }) {
   return (
     <Container>
       <h1>{title}</h1>
@@ -44,3 +44,5 @@ Confirm.defaultProps = {
   title: 'Você está certo disso?',
   message: 'Você deseja confirmar esta ação?',
 };
+
+export default Confirm;

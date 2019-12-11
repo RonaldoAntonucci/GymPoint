@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Pag, StyledForm, StyledInput } from './styles';
 
-export default function Pagination({ page, handlePage, lastPage }) {
+function Pagination({ page, handlePage, lastPage }) {
   const handleNextPage = useCallback(() => {
     handlePage('next');
   }, [handlePage]);
@@ -61,3 +61,5 @@ Pagination.defaultProps = {
   lastPage: 1,
   page: 1,
 };
+
+export default Pagination;
