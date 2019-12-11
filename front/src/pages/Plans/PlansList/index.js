@@ -109,36 +109,33 @@ export default function PlansList() {
               title: 'TÍTULO',
               field: 'title',
               headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
+                textAlign: 'left',
               },
               cellStyle: {
-                fontSize: '19px',
-                color: '#666',
+                textAlign: 'left',
               },
             },
             {
               title: 'DURAÇÃO',
               field: 'duration',
+              type: 'numeric',
               headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
+                textAlign: 'right',
               },
               cellStyle: {
-                fontSize: '19px',
-                color: '#666',
+                textAlign: 'right',
               },
             },
             {
               title: 'VALOR p/MÊS',
               field: 'price',
+              type: 'currency',
+              currencySetting: { locale: 'pt-br', currencyCode: 'brl' },
               headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
+                textAlign: 'right',
               },
               cellStyle: {
-                fontSize: '19px',
-                color: '#666',
+                textAlign: 'right',
               },
             },
           ]}

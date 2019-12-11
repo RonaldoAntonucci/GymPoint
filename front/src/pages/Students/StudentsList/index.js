@@ -134,37 +134,25 @@ export default function StudentsList() {
               title: 'NOME',
               field: 'name',
               headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
+                textAlign: 'left',
               },
               cellStyle: {
-                fontSize: '19px',
-                color: '#666',
+                textAlign: 'left',
               },
             },
             {
               title: 'E-MAIL',
               field: 'email',
-              headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
-              },
-              cellStyle: {
-                fontSize: '19px',
-                color: '#666',
-              },
             },
             {
               title: 'IDADE',
               field: 'age',
               type: 'numeric',
               headerStyle: {
-                fontWeight: 'bold',
-                fontSize: '19px',
+                textAlign: 'right',
               },
               cellStyle: {
-                fontSize: '19px',
-                color: '#666',
+                textAlign: 'right',
               },
             },
           ]}

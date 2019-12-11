@@ -11,6 +11,16 @@ export const StyledTable = styled(Material).attrs(() => ({
     pageSizeOptions: [],
     pageSize: 20,
     maxBodyHeight: 'calc(100vh - 250px)',
+    headerStyle: {
+      fontWeight: 'bold',
+      fontSize: '19px',
+      textAlign: 'center',
+    },
+    cellStyle: {
+      fontSize: '19px',
+      color: '#666',
+      textAlign: 'center',
+    },
   },
 }))``;
 
