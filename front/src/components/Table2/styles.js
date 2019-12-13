@@ -79,7 +79,3 @@ export const ActionButton = styled.button`
     margin-right: 20px;
   }
 `;
-
-export const TableTd = styled.td`
-  text-align: ${props => props.align || 'center'};
-`;
