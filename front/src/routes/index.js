@@ -10,6 +10,8 @@ import CreateStudent from '~/pages/Students/CreateStudent';
 import Plans from '~/pages/Plans/PlansList';
 import CreatePlan from '~/pages/Plans/CreatePlan';
 
+import Registrations from '~/pages/Registrations/RegistrationsList';
+
 export default function Routes() {
   return (
     <Switch>
@@ -22,6 +24,8 @@ export default function Routes() {
       <Route path="/plans/create" component={CreatePlan} isPrivate />
       <Route path="/plans/:id" component={CreatePlan} isPrivate />
       <Route path="/plans" component={Plans} isPrivate />
+
+      <Route path="/registrations" component={Registrations} isPrivate />
     </Switch>
   );
 }

@@ -13,22 +13,31 @@ import Registration from '../models/Registration';
 class RegistrationController {
   // Mostra apenas as matrículas que ainda não terminaram
   async index(req, res) {
-    const limitPage = process.env.PAGE_LIMIT;
+    const limitPage = 2;
     const { page = 1 } = req.query;
 
-    const registrations = await Registration.findAll({
+    const { rows: registrations, count } = await Registration.findAndCountAll({
       limit: limitPage,
       offset: (page - 1) * limitPage,
-      where: {
-        end_date: {
-          [Op.gte]: new Date(),
-        },
-      },
-      order: ['end_date'],
       attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'duration', 'price'],
+        },
+      ],
+      order: ['end_date'],
     });
 
-    return res.json(registrations);
+    return res
+      .set({ total_pages: Math.ceil(count / limitPage) })
+      .json(registrations);
   }
 
   async store(req, res) {

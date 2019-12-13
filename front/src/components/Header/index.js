@@ -53,13 +53,15 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'registrations' })}
-                selected={selected === 'registrations'}
-              >
-                <strong>MATRÍCULAS</strong>
-              </MenuButton>
+              <Link to="/registrations">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'registrations' })}
+                  selected={selected === 'registrations'}
+                >
+                  <strong>MATRÍCULAS</strong>
+                </MenuButton>
+              </Link>
             </li>
             <li>
               <MenuButton
