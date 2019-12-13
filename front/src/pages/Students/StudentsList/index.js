@@ -143,17 +143,17 @@ export default function StudentsList() {
             {
               title: 'E-MAIL',
               field: 'email',
+              headerStyle: {
+                textAlign: 'left',
+              },
+              cellStyle: {
+                textAlign: 'left',
+              },
             },
             {
               title: 'IDADE',
               field: 'age',
               type: 'numeric',
-              headerStyle: {
-                textAlign: 'right',
-              },
-              cellStyle: {
-                textAlign: 'right',
-              },
             },
           ]}
           data={students}

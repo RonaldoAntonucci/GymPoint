@@ -119,12 +119,6 @@ export default function PlansList() {
               title: 'DURAÇÃO',
               field: 'duration',
               type: 'numeric',
-              headerStyle: {
-                textAlign: 'right',
-              },
-              cellStyle: {
-                textAlign: 'right',
-              },
             },
             {
               title: 'VALOR p/MÊS',
@@ -132,10 +126,13 @@ export default function PlansList() {
               type: 'currency',
               currencySetting: { locale: 'pt-br', currencyCode: 'brl' },
               headerStyle: {
-                textAlign: 'right',
+                padding: 0,
+                margin: 0,
               },
               cellStyle: {
-                textAlign: 'right',
+                padding: 0,
+                margin: 0,
+                textAlign: 'center',
               },
             },
           ]}

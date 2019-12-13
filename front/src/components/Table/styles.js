@@ -4,7 +4,7 @@ import Material from 'material-table';
 
 import icons from './icons';
 
-export const StyledTable = styled(Material).attrs(() => ({
+export const StyledTable = styled(Material).attrs(props => ({
   icons,
   options: {
     toolbar: false,
@@ -20,6 +20,7 @@ export const StyledTable = styled(Material).attrs(() => ({
       fontSize: '19px',
       color: '#666',
       textAlign: 'center',
+      paddingLeft: '45px',
     },
   },
 }))``;
