@@ -5,7 +5,13 @@ import { MdCheckCircle } from 'react-icons/md';
 
 import Loading from '~/components/Loading';
 
-import { Table, ActionButton, TableFooter, TableFooterButton } from './styles';
+import {
+  Container,
+  Table,
+  ActionButton,
+  TableFooter,
+  TableFooterButton,
+} from './styles';
 
 function StyledTable({ data, columns, actions, pagination }) {
   const [columnTitles, setColumnTitles] = useState([]);
@@ -30,53 +36,57 @@ function StyledTable({ data, columns, actions, pagination }) {
   );
 
   return !data ? (
-    <Loading />
+    <Container>
+      <Loading />
+    </Container>
   ) : (
     <>
-      <Table>
-        <thead>
-          <tr>
-            {columnTitles.map((title, index) => (
-              <th {...columns[index].styles} key={title}>
-                {title}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(tr => (
-            <tr key={tr.id}>
-              <>
-                {columns.map(td => (
-                  <td key={td.field} {...td.styles}>
-                    {td.type === 'boolean' ? (
-                      <MdCheckCircle
-                        size="20px"
-                        color={tr[td.field] ? 'green' : '#ddd'}
-                      />
-                    ) : (
-                      tr[td.field]
-                    )}
-                  </td>
-                ))}
-                {actions && (
-                  <td>
-                    {actions.map(a => (
-                      <ActionButton
-                        key={a.name}
-                        color={a.color}
-                        onClick={() => a.onClick(tr)}
-                      >
-                        {a.name}
-                      </ActionButton>
-                    ))}
-                  </td>
-                )}
-              </>
+      <Container>
+        <Table>
+          <thead>
+            <tr>
+              {columnTitles.map((title, index) => (
+                <th {...columns[index].styles} key={title}>
+                  {title}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {data.map(tr => (
+              <tr key={tr.id}>
+                <>
+                  {columns.map(td => (
+                    <td key={td.field} {...td.styles}>
+                      {td.type === 'boolean' ? (
+                        <MdCheckCircle
+                          size="20px"
+                          color={tr[td.field] ? 'green' : '#ddd'}
+                        />
+                      ) : (
+                        tr[td.field]
+                      )}
+                    </td>
+                  ))}
+                  {actions && (
+                    <td>
+                      {actions.map(a => (
+                        <ActionButton
+                          key={a.name}
+                          color={a.color}
+                          onClick={() => a.onClick(tr)}
+                        >
+                          {a.name}
+                        </ActionButton>
+                      ))}
+                    </td>
+                  )}
+                </>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
       <TableFooter>
         <TableFooterButton
           disabled={page === 1}
@@ -123,7 +133,7 @@ function StyledTable({ data, columns, actions, pagination }) {
 }
 
 StyledTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.arrayOf(PropTypes.object),
   pagination: PropTypes.shape({
@@ -136,6 +146,7 @@ StyledTable.propTypes = {
 StyledTable.defaultProps = {
   actions: null,
   pagination: null,
+  data: null,
 };
 
 export default StyledTable;

@@ -5,32 +5,23 @@ import Student from '../models/Student';
 class StudentController {
   async index(req, res) {
     const limitPage = process.env.PAGE_LIMIT;
-    const { page = 1 } = req.query;
+    const { page = 1, quantity = 20, q: query = '' } = req.query;
+    const qant = Number(quantity) > limitPage ? limitPage : quantity;
 
-    const { q } = req.query;
+    const { rows: students, count } = await Student.findAndCountAll({
+      limit: qant,
+      offset: (page - 1) * qant,
+      attributes: ['id', 'name', 'email', 'age'],
+      where: {
+        [Op.or]: [
+          { name: { [Op.substring]: `%${query}%` } },
+          { email: { [Op.substring]: `%${query}%` } },
+        ],
+      },
+      order: ['updated_at'],
+    });
 
-    const where = q
-      ? {
-          name: {
-            [Op.substring]: q,
-          },
-        }
-      : null;
-
-    const [total, students] = await Promise.all([
-      await Student.count(),
-      await Student.findAll({
-        limit: limitPage,
-        offset: (page - 1) * limitPage,
-        order: ['id'],
-        where,
-        attributes: ['id', 'name', 'email', 'age'],
-      }),
-    ]);
-
-    const lastPage = Math.trunc(total / limitPage + 1);
-
-    return res.json({ students, lastPage });
+    return res.set({ total_pages: Math.ceil(count / qant) }).json(students);
   }
 
   async show(req, res) {

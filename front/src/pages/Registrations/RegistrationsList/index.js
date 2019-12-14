@@ -13,12 +13,9 @@ import api from '~/services/api';
 
 export default function RegistrationsList() {
   const [page, setPage] = useState(1);
-  const [data, totalPages] = useApiGetRequest(
-    api,
-    '/registrations',
-    { params: { page } },
-    []
-  );
+  const [data, totalPages] = useApiGetRequest(api, '/registrations', {
+    params: { page },
+  });
 
   const registrations = useMemo(() => {
     return !data

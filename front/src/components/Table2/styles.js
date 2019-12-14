@@ -2,14 +2,20 @@ import styled, { css } from 'styled-components';
 
 import palette from '~/styles/palette';
 
+export const Container = styled.div`
+  max-height: calc(100% - 60px);
+  overflow-y: auto;
+`;
+
 export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
-  max-height: calc(100vh - 184px);
+  height: 100%;
 
   thead,
   tbody {
     text-align: left;
+
     tr {
       color: #666;
       font-size: 16px;

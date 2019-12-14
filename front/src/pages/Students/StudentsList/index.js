@@ -6,11 +6,12 @@ import { confirmAlert } from 'react-confirm-alert';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Form } from '@rocketseat/unform';
+import { useApiGetRequest } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Input from '~/components/Input';
 import Content from '~/components/Content';
-import Table from '~/components/Table';
+import Table from '~/components/Table2';
 import Confirm from '~/components/Confirm';
 
 import palette from '~/styles/palette';
@@ -20,73 +21,19 @@ import { Options, Button, Title } from './styles';
 import api from '~/services/api';
 
 export default function StudentsList() {
-  const [students, setStudents] = useState([]);
   const [page, setPage] = useState(1);
-  const [lastPage, setLastPage] = useState(1);
-  const [loading, setLoading] = useState(true);
 
-  const loadStudents = useCallback(
-    async filter => {
-      setLoading(true);
-      try {
-        const q = filter ? `&q=${filter}` : '';
-        if (filter) setPage(1);
-        const response = await api.get(`/students?page=${page}${q}`);
-        setStudents(response.data.students);
-        if (lastPage !== response.data.lastPage) {
-          setLastPage(response.data.lastPage);
-        }
-      } catch {
-        toast.error('Não foi possível carregar os alunos.');
-      }
-      setLoading(false);
-    },
-    [lastPage, page]
-  );
+  const [students, totalPages] = useApiGetRequest(api, '/students', {
+    params: { page },
+  });
 
   const deleteStudent = useCallback(id => {
     console.log(id);
   }, []);
 
-  useEffect(() => {
-    loadStudents();
-  }, [loadStudents, page]);
-
-  const handleSearch = useCallback(
-    data => {
-      loadStudents(data.search);
-    },
-    [loadStudents]
-  );
-
-  const handlePage = useCallback(
-    paginate => {
-      switch (paginate) {
-        case null:
-          break;
-        case 'next': {
-          if (page < lastPage) setPage(page + 1);
-          break;
-        }
-        case 'previous': {
-          if (page > 1) setPage(page - 1);
-          break;
-        }
-        case 'first': {
-          if (page !== 1) setPage(1);
-          break;
-        }
-        case 'last': {
-          if (page !== lastPage) setPage(lastPage);
-          break;
-        }
-        default: {
-          setPage(paginate);
-        }
-      }
-    },
-    [lastPage, page]
-  );
+  const handleSearch = useCallback(data => {
+    console.log(data);
+  });
 
   const handleDelete = useCallback(
     id => {
@@ -128,27 +75,14 @@ export default function StudentsList() {
       </Title>
       <Content>
         <Table
-          isLoading={loading}
           columns={[
             {
               title: 'NOME',
               field: 'name',
-              headerStyle: {
-                textAlign: 'left',
-              },
-              cellStyle: {
-                textAlign: 'left',
-              },
             },
             {
               title: 'E-MAIL',
               field: 'email',
-              headerStyle: {
-                textAlign: 'left',
-              },
-              cellStyle: {
-                textAlign: 'left',
-              },
             },
             {
               title: 'IDADE',
@@ -157,18 +91,21 @@ export default function StudentsList() {
             },
           ]}
           data={students}
-          pagination={{ handlePage, lastPage, page }}
-          action={[
+          pagination={{
+            page,
+            totalPages,
+            onPageChange: setPage,
+          }}
+          actions={[
             {
-              link: '/students',
-              text: 'editar',
+              name: 'editar',
+              onClick: console.log,
               color: palette.info,
-              onClick: () => {},
             },
             {
-              text: 'apagar',
+              name: 'apagar',
               onClick: handleDelete,
-              color: palette.primary,
+              color: palette.danger,
             },
           ]}
         />

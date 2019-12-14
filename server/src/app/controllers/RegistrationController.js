@@ -32,7 +32,7 @@ class RegistrationController {
           attributes: ['id', 'title', 'duration', 'price'],
         },
       ],
-      order: ['end_date'],
+      order: ['updated_at'],
     });
 
     return res
