@@ -8,4 +8,5 @@ export default styled.div`
   background: ${colors.white};
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  height: calc(100vh - 164px);
 `;

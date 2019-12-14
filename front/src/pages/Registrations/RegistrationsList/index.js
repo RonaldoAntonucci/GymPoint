@@ -45,14 +45,11 @@ export default function RegistrationsList() {
     console.log(data);
   }, []);
 
-  const handlePage = useCallback(p => {
-    setPage(p);
-  }, []);
   return (
     <Container>
       <Content>
         <Table2
-          data={registrations || []}
+          data={registrations}
           columns={[
             {
               title: 'ALUNO',
@@ -96,7 +93,7 @@ export default function RegistrationsList() {
           pagination={{
             page,
             totalPages,
-            onPageChange: handlePage,
+            onPageChange: setPage,
           }}
         />
       </Content>

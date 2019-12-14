@@ -5,6 +5,7 @@ import palette from '~/styles/palette';
 export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
+  max-height: calc(100vh - 184px);
 
   thead,
   tbody {
@@ -79,8 +80,3 @@ export const ActionButton = styled.button`
     margin-right: 20px;
   }
 `;
-
-export const Loading = styled.div.attrs(props => {
-  console.log(props);
-  return {};
-})``;
