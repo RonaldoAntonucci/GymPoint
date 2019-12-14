@@ -8,6 +8,7 @@ function useApiGetRequest(api, url, options) {
 
   useEffect(() => {
     async function getData() {
+      setData(null);
       try {
         const response = await api.get(url, {
           ...options,
@@ -17,13 +18,13 @@ function useApiGetRequest(api, url, options) {
         setTotalPages(response.headers.total_pages);
       } catch (err) {
         setError(err);
-        toast.error('Não foi possível carregar os planos.');
+        toast.error(`Não foi possível carregar ${url}.`);
       }
     }
 
     getData();
     // eslint-disable-next-line
-  }, [options.params.page]);
+  }, [options.params.page, options.params.q]);
 
   return [data, totalPages, error];
 }

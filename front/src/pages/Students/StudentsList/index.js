@@ -1,18 +1,15 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { confirmAlert } from 'react-confirm-alert';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Form } from '@rocketseat/unform';
-import { useApiGetRequest } from '~/Hooks';
+import { useApiGetRequest, useHandleDelete } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Input from '~/components/Input';
 import Content from '~/components/Content';
 import Table from '~/components/Table2';
-import Confirm from '~/components/Confirm';
 
 import palette from '~/styles/palette';
 
@@ -22,37 +19,14 @@ import api from '~/services/api';
 
 export default function StudentsList() {
   const [page, setPage] = useState(1);
-
-  const [students, totalPages] = useApiGetRequest(api, '/students', {
-    params: { page },
-  });
-
-  const deleteStudent = useCallback(id => {
-    console.log(id);
-  }, []);
-
-  const handleSearch = useCallback(data => {
-    console.log(data);
-  });
-
-  const handleDelete = useCallback(
-    id => {
-      confirmAlert({
-        customUI: (
-          { onClose } // eslint-disable-line
-        ) => (
-          <Confirm
-            callback={() => deleteStudent(id)}
-            onClose={onClose}
-            title="Deseja excluir este aluno?"
-            message="Se confirmar, o aluno será deletado. Isso é irreversível. Deseja
-                mesmo excluí-lo?"
-          />
-        ),
-      });
-    },
-    [deleteStudent]
+  const [filters, setFilters] = useState({});
+  const handleDelete = useHandleDelete(
+    'Se confirmar, o aluno será deletado. Isso é irreversível. Desejamesmo excluí-lo?'
   );
+
+  const [students, totalPages, loading] = useApiGetRequest(api, '/students', {
+    params: { page, q: filters.search },
+  });
 
   return (
     <Container>
@@ -63,7 +37,7 @@ export default function StudentsList() {
           <Link to="/students/create">
             <Button ico={MdAdd} text="CADASTRAR" type="button" />
           </Link>
-          <Form onSubmit={handleSearch}>
+          <Form onSubmit={setFilters}>
             <Input
               type="text"
               name="search"
@@ -75,14 +49,21 @@ export default function StudentsList() {
       </Title>
       <Content>
         <Table
+          isLoading={loading}
           columns={[
             {
               title: 'NOME',
               field: 'name',
+              styles: {
+                align: 'left',
+              },
             },
             {
               title: 'E-MAIL',
               field: 'email',
+              styles: {
+                align: 'left',
+              },
             },
             {
               title: 'IDADE',
