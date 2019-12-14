@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import { MdCheckCircle } from 'react-icons/md';
 
-import { Table, ActionButton, TableFooter, TableFooterButton } from './styles';
+import {
+  Table,
+  ActionButton,
+  TableFooter,
+  TableFooterButton,
+  Loading,
+} from './styles';
 
 function StyledTable({ data, columns, actions, pagination }) {
   const [columnTitles, setColumnTitles] = useState([]);

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { useApiGetRequest } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -11,22 +12,18 @@ import palette from '~/styles/palette';
 import api from '~/services/api';
 
 export default function RegistrationsList() {
-  const [loading, setLoading] = useState(false);
-  const [registrations, setRegistrations] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [data, totalPages] = useApiGetRequest(
+    api,
+    '/registrations',
+    { params: { page } },
+    []
+  );
 
-  useEffect(() => {
-    async function loadRegistrations() {
-      try {
-        setLoading(true);
-        const response = await api.get(`/registrations`, {
-          params: {
-            page,
-          },
-        });
-        setTotalPages(response.headers.total_pages);
-        const data = response.data.map(registration => ({
+  const registrations = useMemo(() => {
+    return !data
+      ? null
+      : data.map(registration => ({
           id: registration.id,
           start_date: format(
             parseISO(registration.start_date),
@@ -42,15 +39,7 @@ export default function RegistrationsList() {
           planTitle: registration.plan.title,
           active: registration.active,
         }));
-        setRegistrations(data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadRegistrations();
-  }, [page]);
+  }, [data]);
 
   const handleEdit = useCallback(data => {
     console.log(data);
@@ -63,7 +52,7 @@ export default function RegistrationsList() {
     <Container>
       <Content>
         <Table2
-          data={registrations}
+          data={registrations || []}
           columns={[
             {
               title: 'ALUNO',

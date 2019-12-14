@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function useApiGetRequest({ api, url, options }) {
+function useApiGetRequest(api, url, options) {
   const [data, setData] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
 
@@ -12,7 +12,8 @@ function useApiGetRequest({ api, url, options }) {
     }
 
     getData();
-  });
+    // eslint-disable-next-line
+  }, [options.params.page]);
 
   return [data, totalPages];
 }

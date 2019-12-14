@@ -79,3 +79,8 @@ export const ActionButton = styled.button`
     margin-right: 20px;
   }
 `;
+
+export const Loading = styled.div.attrs(props => {
+  console.log(props);
+  return {};
+})``;
