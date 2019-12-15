@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Form } from '@rocketseat/unform';
-import { useApiGetRequest, useHandleDelete } from '~/Hooks';
+import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Input from '~/components/Input';
@@ -20,6 +20,7 @@ import api from '~/services/api';
 export default function StudentsList() {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({});
+  const handleEdit = useHandleEdit('students/create');
   const handleDelete = useHandleDelete(
     'Se confirmar, o aluno será deletado. Isso é irreversível. Desejamesmo excluí-lo?'
   );
@@ -80,7 +81,7 @@ export default function StudentsList() {
           actions={[
             {
               name: 'editar',
-              onClick: console.log,
+              onClick: handleEdit,
               color: palette.info,
             },
             {

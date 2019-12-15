@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import history from '~/services/history';
+import { useApiSubmit } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -18,74 +18,40 @@ import { Button } from './styles';
 
 import api from '~/services/api';
 
-function CreateStudent({ match }) {
-  const id = match.params;
-  const [loading, setLoading] = useState(false);
-  const [student, setStudent] = useState({});
-
-  const submitStudent = useCallback(async (data, studentId) => {
-    setLoading(true);
-    try {
-      const method = studentId ? api.put : api.post;
-      const complement = studentId ? `/${studentId}` : '';
-      const { name, email, age, weight, height } = data;
-      await method(`/students${complement}`, {
-        name,
-        email,
-        age,
-        weight,
-        height,
-      });
-
+function CreateStudent({ location }) {
+  const [student, setStudent] = useState(
+    location.state ? location.state.data : null
+  );
+  const [submit, loading] = useApiSubmit({
+    api,
+    url: `/students`,
+    success: () =>
       toast.success(
-        `Usuário ${studentId ? 'editado' : 'cadastrado'} com sucesso.`
-      );
-
-      history.push('/students');
-      setLoading(false);
-    } catch {
-      toast.error('Não foi possível salvar este aluno.');
-      setLoading(false);
-    }
-  }, []);
-
-  const loadStudent = useCallback(async studentId => {
-    setLoading(true);
-    try {
-      const response = await api.get(`/students/${studentId}`);
-      const { data } = response;
-      setStudent(data);
-      setLoading(false);
-    } catch {
-      toast.error('Não foi possível carregar este aluno');
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    if (id.id) loadStudent(id.id);
-    return function cleanup() {
-      abortController.abort();
-    };
-  }, [id, loadStudent]);
+        `Usuário ${student ? 'editado' : 'cadastrado'} com sucesso.`
+      ),
+    failed: () => toast.error('Não foi possível salvar este aluno.'),
+    setResponse: setStudent,
+  });
 
   const handleSubmit = useCallback(
     data => {
-      submitStudent(data, id.id);
+      const id = student ? student.id : null;
+      submit({ id, ...data });
     },
-    [submitStudent, id]
+    [student, submit]
   );
+
   return (
     <Container>
       <Content>
         <Form
           schema={schema}
           onSubmit={handleSubmit}
-          initialData={Object.entries(student).length !== 0 ? student : null}
+          initialData={student}
+          loading={loading.toString()}
         >
           <Title>
-            <h1>{id ? 'Edição de aluno' : 'Cadastro de aluno'}</h1>
+            <h1>{student ? 'Edição de aluno' : 'Cadastro de aluno'}</h1>
             <div>
               <Link to="/students">
                 <Button
@@ -150,17 +116,17 @@ function CreateStudent({ match }) {
 }
 
 CreateStudent.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: PropTypes.object,
     }),
   }),
 };
 
 CreateStudent.defaultProps = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: null,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: null,
     }),
   }),
 };

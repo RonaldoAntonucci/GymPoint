@@ -11,6 +11,7 @@ import {
   ActionButton,
   TableFooter,
   TableFooterButton,
+  TableContainer,
 } from './styles';
 
 function StyledTable({ data, columns, actions, pagination }) {
@@ -40,8 +41,8 @@ function StyledTable({ data, columns, actions, pagination }) {
       <Loading />
     </Container>
   ) : (
-    <>
-      <Container>
+    <Container>
+      <TableContainer>
         <Table>
           <thead>
             <tr>
@@ -86,7 +87,8 @@ function StyledTable({ data, columns, actions, pagination }) {
             ))}
           </tbody>
         </Table>
-      </Container>
+      </TableContainer>
+
       <TableFooter>
         <TableFooterButton
           disabled={page === 1}
@@ -128,7 +130,7 @@ function StyledTable({ data, columns, actions, pagination }) {
           Última
         </TableFooterButton>
       </TableFooter>
-    </>
+    </Container>
   );
 }
 

@@ -64,13 +64,15 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <MenuButton
-                type="button"
-                onClick={() => handleClickMenu({ menu: 'help-orders' })}
-                selected={selected === 'help-orders'}
-              >
-                <strong>PEDIDOS DE AUXÍLIO</strong>
-              </MenuButton>
+              <Link to="/help-orders">
+                <MenuButton
+                  type="button"
+                  onClick={() => handleClickMenu({ menu: 'help-orders' })}
+                  selected={selected === 'help-orders'}
+                >
+                  <strong>PEDIDOS DE AUXÍLIO</strong>
+                </MenuButton>
+              </Link>
             </li>
           </ul>
         </Menu>

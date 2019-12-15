@@ -12,6 +12,8 @@ import CreatePlan from '~/pages/Plans/CreatePlan';
 
 import Registrations from '~/pages/Registrations/RegistrationsList';
 
+import HelpOrders from '~/pages/HelpOrders/HelpOrdersList';
+
 export default function Routes() {
   return (
     <Switch>
@@ -26,6 +28,8 @@ export default function Routes() {
       <Route path="/plans" component={Plans} isPrivate />
 
       <Route path="/registrations" component={Registrations} isPrivate />
+
+      <Route path="/help-orders" component={HelpOrders} isPrivate />
     </Switch>
   );
 }

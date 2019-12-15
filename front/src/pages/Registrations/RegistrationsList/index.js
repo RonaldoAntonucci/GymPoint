@@ -1,15 +1,20 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { MdAdd } from 'react-icons/md';
 import { useApiGetRequest } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
+import Title from '~/components/Title';
 import Table2 from '~/components/Table2';
 
 import palette from '~/styles/palette';
 
 import api from '~/services/api';
+
+import { Options, Button } from './styles';
 
 export default function RegistrationsList() {
   const [page, setPage] = useState(1);
@@ -44,6 +49,14 @@ export default function RegistrationsList() {
 
   return (
     <Container>
+      <Title>
+        <h1>Gerenciando Matrículas</h1>
+        <Options>
+          <Link to="/registration/create">
+            <Button ico={MdAdd} text="CADASTRAR" type="button" />
+          </Link>
+        </Options>
+      </Title>
       <Content>
         <Table2
           data={registrations}

@@ -11,7 +11,7 @@ class StudentController {
     const { rows: students, count } = await Student.findAndCountAll({
       limit: qant,
       offset: (page - 1) * qant,
-      attributes: ['id', 'name', 'email', 'age'],
+      attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
       where: {
         [Op.or]: [
           { name: { [Op.substring]: `%${query}%` } },

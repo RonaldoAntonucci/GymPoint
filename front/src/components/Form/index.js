@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Form } from '@rocketseat/unform';
 import Input from '~/components/Input';
 
+import Loading from '~/components/Loading';
+
 export const FormInput = styled(Input)`
   width: 100%;
   & + div {
@@ -18,4 +20,6 @@ export const FormRow = styled.div`
   justify-content: center;
 `;
 
-export default styled(Form)``;
+export default styled(Form).attrs(props => ({
+  children: props.loading === 'true' ? Loading() : props.children,
+}))``;

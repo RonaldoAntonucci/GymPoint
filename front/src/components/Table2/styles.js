@@ -2,8 +2,10 @@ import styled, { css } from 'styled-components';
 
 import palette from '~/styles/palette';
 
-export const Container = styled.div`
-  max-height: calc(100% - 60px);
+export const Container = styled.div``;
+
+export const TableContainer = styled.div`
+  max-height: calc(100vh - 280px);
   overflow-y: auto;
 `;
 
@@ -33,6 +35,8 @@ export const Table = styled.table`
     }
   }
 `;
+
+export const TableBody = styled.tbody``;
 
 export const TableFooter = styled.div`
   display: flex;
