@@ -4,22 +4,18 @@ import Plan from '../models/Plan';
 
 class PlanController {
   async index(req, res) {
-    const { page = 1 } = req.query;
     const limitPage = process.env.PAGE_LIMIT;
+    const { page = 1, quantity = 20 } = req.query;
+    const qant = Number(quantity) > limitPage ? limitPage : quantity;
 
-    const [total, plans] = await Promise.all([
-      Plan.count(),
-      await Plan.findAll({
-        order: [['updated_at', 'DESC']],
-        limit: limitPage,
-        offset: (page - 1) * limitPage,
-        attributes: ['id', 'title', 'duration', 'price'],
-      }),
-    ]);
+    const { rows: plans, count } = await Plan.findAndCountAll({
+      limit: qant,
+      offset: (page - 1) * qant,
+      attributes: ['id', 'title', 'duration', 'price'],
+      order: [['updated_at', 'DESC']],
+    });
 
-    const lastPage = Math.trunc(total / limitPage + 1);
-
-    return res.json({ plans, lastPage });
+    return res.set({ total_pages: Math.ceil(count / qant) }).json(plans);
   }
 
   async show(req, res) {

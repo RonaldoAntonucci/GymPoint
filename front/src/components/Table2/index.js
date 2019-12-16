@@ -70,7 +70,7 @@ function StyledTable({ data, columns, actions, pagination }) {
                     </td>
                   ))}
                   {actions && (
-                    <td>
+                    <td align="right">
                       {actions.map(a => (
                         <ActionButton
                           key={a.name}

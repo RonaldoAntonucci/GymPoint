@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 
-import { Form } from '@rocketseat/unform';
+import Form from '~/components/Form';
 import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/Hooks';
 
 import Container from '~/components/Container';
@@ -25,7 +25,7 @@ export default function StudentsList() {
     'Se confirmar, o aluno será deletado. Isso é irreversível. Desejamesmo excluí-lo?'
   );
 
-  const [students, totalPages, loading] = useApiGetRequest(api, '/students', {
+  const [students, totalPages] = useApiGetRequest(api, '/students', {
     params: { page, q: filters.search },
   });
 
@@ -50,7 +50,6 @@ export default function StudentsList() {
       </Title>
       <Content>
         <Table
-          isLoading={loading}
           columns={[
             {
               title: 'NOME',

@@ -7,6 +7,7 @@ export const Container = styled.div``;
 export const TableContainer = styled.div`
   max-height: calc(100vh - 280px);
   overflow-y: auto;
+  padding-right: 20px;
 `;
 
 export const Table = styled.table`
