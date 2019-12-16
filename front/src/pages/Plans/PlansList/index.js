@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { MdAdd } from 'react-icons/md';
 
-import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/Hooks';
+import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';

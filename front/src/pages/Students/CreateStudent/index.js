@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { useApiSubmit } from '~/Hooks';
+import { useApiSubmit } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -12,7 +12,7 @@ import Form, { FormRow, FormInput } from '~/components/Form';
 
 import palette from '~/styles/palette';
 
-import schema from './validations';
+import schema from '~/validators/StudentFormValidator';
 
 import { Button } from './styles';
 
@@ -20,7 +20,7 @@ import api from '~/services/api';
 
 function CreateStudent({ location }) {
   const [student, setStudent] = useState(
-    location.state ? location.state.data : null
+    location.state ? location.state.data : { age: 0, height: 0, weight: 0 }
   );
   const [submit, loading] = useApiSubmit({
     api,

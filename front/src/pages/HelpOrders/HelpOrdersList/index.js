@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
-import { useApiGetRequest } from '~/Hooks';
+import { useApiGetRequest } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';

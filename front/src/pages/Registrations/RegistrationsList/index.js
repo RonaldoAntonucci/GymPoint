@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { MdAdd } from 'react-icons/md';
-import { useApiGetRequest } from '~/Hooks';
+import { useApiGetRequest } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -43,8 +43,8 @@ export default function RegistrationsList() {
         }));
   }, [data]);
 
-  const handleEdit = useCallback(data => {
-    console.log(data);
+  const handleEdit = useCallback(d => {
+    console.log(d);
   }, []);
 
   return (

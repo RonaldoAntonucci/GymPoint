@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { useApiSubmit } from '~/Hooks';
+import { useApiSubmit } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -12,7 +12,7 @@ import Form, { FormRow, FormInput } from '~/components/Form';
 
 import palette from '~/styles/palette';
 
-// import schema from './validations';
+import schema from '~/validators/PlanFormValidator';
 
 import { Button } from './styles';
 
@@ -21,7 +21,9 @@ import api from '~/services/api';
 import { formatPrice } from '~/util/format';
 
 function CreatePlan({ location }) {
-  const [plan, setPlan] = useState(location.state ? location.state.data : null);
+  const [plan, setPlan] = useState(
+    location.state ? location.state.data : { duration: 0, price: 0 }
+  );
   const [duration, setDuration] = useState(plan ? plan.duration : 0);
   const [price, setPrice] = useState(plan ? plan.price : 0);
   const [submit, loading] = useApiSubmit({
@@ -39,7 +41,7 @@ function CreatePlan({ location }) {
     <Container>
       <Content>
         <Form
-          // schema={schema}
+          schema={schema}
           onSubmit={data => submit({ id: plan ? plan.id : null, ...data })}
           initialData={plan}
           loading={loading.toString()}

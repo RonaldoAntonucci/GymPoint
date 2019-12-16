@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import Form from '~/components/Form';
-import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/Hooks';
+import { useApiGetRequest, useHandleDelete, useHandleEdit } from '~/hooks';
 
 import Container from '~/components/Container';
 import Input from '~/components/Input';

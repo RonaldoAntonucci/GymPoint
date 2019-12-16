@@ -5,7 +5,7 @@ export default Yup.object().shape({
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
-  age: Yup.number()
+  age: Yup.number('Idade inválida')
     .integer('Idade deve ser um número inteiro')
     .required('A idade é obrigatória')
     .positive('Idade inválida'),
