@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import history from '~/services/history';
+import { useApiSubmit } from '~/Hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -18,77 +18,34 @@ import { Button } from './styles';
 
 import api from '~/services/api';
 
-function CreatePlan({ match }) {
-  const id = match.params;
-  const [loading, setLoading] = useState(false);
-  const [plan, setPlan] = useState({});
-  const [priceInput, setPriceInput] = useState(0);
-  const [durationInput, setDurationInput] = useState(0);
+import { formatPrice } from '~/util/format';
 
-  const submitPlan = useCallback(async (data, planId) => {
-    setLoading(true);
-    try {
-      const method = planId ? api.put : api.post;
-      const complement = planId ? `/${planId}` : '';
-      const { title, duration, price } = data;
-      await method(`/plans${complement}`, { title, duration, price });
+function CreatePlan({ location }) {
+  const [plan, setPlan] = useState(location.state ? location.state.data : null);
+  const [duration, setDuration] = useState(plan ? plan.duration : 0);
+  const [price, setPrice] = useState(plan ? plan.price : 0);
+  const [submit, loading] = useApiSubmit({
+    api,
+    url: `/plans`,
+    success: () =>
+      toast.success(`Plano ${plan ? 'editado' : 'cadastrado'} com sucesso.`),
+    failed: () => toast.error('Não foi possível salvar este plano.'),
+    setResponse: setPlan,
+  });
 
-      toast.success(`Plano ${planId ? 'editado' : 'cadastrado'} com sucesso.`);
-
-      history.push('/plans');
-      setLoading(false);
-    } catch {
-      toast.error('Não foi possível salvar este plano.');
-      setLoading(false);
-    }
-  }, []);
-
-  const loadPlan = useCallback(async planId => {
-    setLoading(true);
-    try {
-      const response = await api.get(`/plans/${planId}`);
-      const { data } = response;
-      setLoading(false);
-      setPriceInput(data.price);
-      setDurationInput(data.duration);
-      setPlan(data);
-    } catch {
-      toast.error('Não foi possível carregar este plano');
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (id.id) loadPlan(id.id);
-  }, [id, loadPlan]);
-
-  const handleSubmit = useCallback(
-    data => {
-      console.log(data);
-      submitPlan(data, id.id);
-    },
-    [submitPlan, id.id]
-  );
-
-  const total = useMemo(() => durationInput * priceInput, [
-    durationInput,
-    priceInput,
-  ]);
-
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
+  const total = useMemo(() => formatPrice(duration * price), [duration, price]);
 
   return (
     <Container>
       <Content>
         <Form
           // schema={schema}
-          onSubmit={handleSubmit}
-          initialData={Object.entries(plan).length !== 0 ? { ...plan } : null}
+          onSubmit={data => submit({ id: plan ? plan.id : null, ...data })}
+          initialData={plan}
+          loading={loading.toString()}
         >
           <Title>
-            <h1>{id ? 'Edição de planos' : 'Cadastro de planos'}</h1>
+            <h1>{plan ? 'Edição de planos' : 'Cadastro de planos'}</h1>
             <div>
               <Link to="/plans">
                 <Button
@@ -123,7 +80,7 @@ function CreatePlan({ match }) {
               placeholder="Exemplo: 12"
               label="DURACAO(em meses)"
               min={0}
-              onChange={e => setDurationInput(e.target.value)}
+              onChange={e => setDuration(e.target.value)}
             />
             <FormInput
               name="price"
@@ -132,16 +89,14 @@ function CreatePlan({ match }) {
               placeholder="Exemplo: 99,90"
               label="PREÇO MENSAL"
               min={0}
-              // context={createPlanContext}
-              onChange={e => setPriceInput(e.target.value)}
+              onChange={e => setPrice(e.target.value)}
             />
             <FormInput
               name="total"
-              type="number"
+              type="text"
               value={total}
               readOnly
               label="PREÇO TOTAL"
-              step="0.01"
             />
           </FormRow>
         </Form>
@@ -151,17 +106,17 @@ function CreatePlan({ match }) {
 }
 
 CreatePlan.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: PropTypes.object,
     }),
   }),
 };
 
 CreatePlan.defaultProps = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: null,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: null,
     }),
   }),
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
@@ -33,20 +33,14 @@ function CreateStudent({ location }) {
     setResponse: setStudent,
   });
 
-  const handleSubmit = useCallback(
-    data => {
-      const id = student ? student.id : null;
-      submit({ id, ...data });
-    },
-    [student, submit]
-  );
-
   return (
     <Container>
       <Content>
         <Form
           schema={schema}
-          onSubmit={handleSubmit}
+          onSubmit={data =>
+            submit({ id: student ? student.id : null, ...data })
+          }
           initialData={student}
           loading={loading.toString()}
         >
