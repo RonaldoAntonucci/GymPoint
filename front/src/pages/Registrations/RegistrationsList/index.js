@@ -52,7 +52,7 @@ export default function RegistrationsList() {
       <Title>
         <h1>Gerenciando Matrículas</h1>
         <Options>
-          <Link to="/registration/create">
+          <Link to="/registrations/create">
             <Button ico={MdAdd} text="CADASTRAR" type="button" />
           </Link>
         </Options>

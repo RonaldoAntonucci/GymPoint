@@ -7,6 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
+  padding: 0 5px;
+  width: 100%;
 
   label {
     margin-bottom: 8px;
@@ -19,13 +21,14 @@ export const Container = styled.div`
     line-height: 16px;
   }
 
-  input {
+  select {
     border: 2px solid ${palette.grey};
     border-radius: 4px;
     height: 44px;
-    padding: ${props => (props.withIco ? '0 15px 0 30px' : '0 15px')};
+    padding: 0 15px;
     color: ${palette.dark};
     width: 100%;
+    background: none;
 
     &::placeholder {
       color: ${palette.grey};
@@ -40,18 +43,5 @@ export const Container = styled.div`
     color: ${palette.primary};
     align-self: flex-start;
     font-weight: bold;
-  }
-`;
-
-export const IcoContent = styled.div.attrs(props => ({
-  children: props.ico(),
-}))`
-  position: absolute;
-  margin-left: 30px;
-  margin-top: 13px;
-
-  > svg {
-    font-size: 18px;
-    color: ${palette.darkGrey};
   }
 `;

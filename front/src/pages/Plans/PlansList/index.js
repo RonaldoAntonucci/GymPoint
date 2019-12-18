@@ -20,7 +20,7 @@ import { formatPrice } from '~/util/format';
 export default function PlansList() {
   const [page, setPage] = useState(1);
 
-  const handleEdit = useHandleEdit('plans/create');
+  const handleEdit = useHandleEdit('plans');
   const handleDelete = useHandleDelete(
     'Se confirmar, o plano será deletado. Isso é irreversível. Desejamesmo excluí-lo?'
   );

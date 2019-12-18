@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-function useApiGetRequest(api, url, options) {
+export default function(api, url, options) {
   const [data, setData] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [error, setError] = useState(null);
@@ -28,5 +28,3 @@ function useApiGetRequest(api, url, options) {
 
   return [data, totalPages, error];
 }
-
-export default useApiGetRequest;

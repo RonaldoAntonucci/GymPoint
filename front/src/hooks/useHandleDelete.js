@@ -2,7 +2,7 @@ import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import Confirm from '~/components/Confirm';
 
-function useHandleDelete(message) {
+export default function(message) {
   function dell(id) {
     console.log(id);
   }
@@ -23,5 +23,3 @@ function useHandleDelete(message) {
 
   return confirmation;
 }
-
-export default useHandleDelete;

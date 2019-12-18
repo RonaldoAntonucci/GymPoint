@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { useApiSubmit } from '~/hooks';
+import { useApiSubmit, useApiGetById } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -18,11 +18,11 @@ import { Button } from './styles';
 
 import api from '~/services/api';
 
-function CreateStudent({ location }) {
+function CreateStudent({ location, match }) {
   const [student, setStudent] = useState(
-    location.state ? location.state.data : { age: 0, height: 0, weight: 0 }
+    location.state ? location.state.data : null
   );
-  const [submit, loading] = useApiSubmit({
+  const [submit, submitLoading] = useApiSubmit({
     api,
     url: `/students`,
     success: () =>
@@ -32,15 +32,30 @@ function CreateStudent({ location }) {
     failed: () => toast.error('Não foi possível salvar este aluno.'),
     setResponse: setStudent,
   });
+  const [getStudentById, getStudentByIdLoading] = useApiGetById(
+    api,
+    '/students',
+    setStudent
+  );
+
+  useEffect(() => {
+    const { id } = match.params;
+    if (!student && id) {
+      getStudentById(id);
+    }
+  }, [getStudentById, match, student]);
+
+  const loading = useMemo(() => submitLoading || getStudentByIdLoading, [
+    getStudentByIdLoading,
+    submitLoading,
+  ]);
 
   return (
     <Container>
       <Content>
         <Form
           schema={schema}
-          onSubmit={data =>
-            submit({ id: student ? student.id : null, ...data })
-          }
+          onSubmit={data => submit({ id: student.id, ...data })}
           initialData={student}
           loading={loading.toString()}
         >
@@ -115,6 +130,9 @@ CreateStudent.propTypes = {
       data: PropTypes.object,
     }),
   }),
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
 };
 
 CreateStudent.defaultProps = {
@@ -123,6 +141,7 @@ CreateStudent.defaultProps = {
       data: null,
     }),
   }),
+  match: null,
 };
 
 export default CreateStudent;

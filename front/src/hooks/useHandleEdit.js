@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import history from '~/services/history';
 
-function useHandleEdit(url) {
+export default function(url) {
   const handleEdit = useCallback(
     data => {
       history.push({
@@ -14,5 +14,3 @@ function useHandleEdit(url) {
 
   return handleEdit;
 }
-
-export default useHandleEdit;

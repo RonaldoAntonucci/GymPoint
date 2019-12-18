@@ -11,6 +11,7 @@ import Plans from '~/pages/Plans/PlansList';
 import CreatePlan from '~/pages/Plans/CreatePlan';
 
 import Registrations from '~/pages/Registrations/RegistrationsList';
+import CreateRegistration from '~/pages/Registrations/CreateRegistration';
 
 import HelpOrders from '~/pages/HelpOrders/HelpOrdersList';
 
@@ -27,6 +28,16 @@ export default function Routes() {
       <Route path="/plans/:id" component={CreatePlan} isPrivate />
       <Route path="/plans" component={Plans} isPrivate />
 
+      <Route
+        path="/registrations/create"
+        component={CreateRegistration}
+        isPrivate
+      />
+      <Route
+        path="/registrations/:id"
+        component={CreateRegistration}
+        isPrivate
+      />
       <Route path="/registrations" component={Registrations} isPrivate />
 
       <Route path="/help-orders" component={HelpOrders} isPrivate />

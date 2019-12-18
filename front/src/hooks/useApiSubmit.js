@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-function useApiSubmit({
+export default function({
   api = { post: () => {}, put: () => {} },
   url = '/',
   success = () => {},
@@ -30,5 +30,3 @@ function useApiSubmit({
 
   return [handleSubmit, loading];
 }
-
-export default useApiSubmit;

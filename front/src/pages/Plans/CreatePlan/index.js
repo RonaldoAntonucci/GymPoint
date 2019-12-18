@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import { useApiSubmit } from '~/hooks';
+import { useApiSubmit, useApiGetById } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -20,13 +20,11 @@ import api from '~/services/api';
 
 import { formatPrice } from '~/util/format';
 
-function CreatePlan({ location }) {
-  const [plan, setPlan] = useState(
-    location.state ? location.state.data : { duration: 0, price: 0 }
-  );
+function CreatePlan({ location, match }) {
+  const [plan, setPlan] = useState(location.state ? location.state.data : null);
   const [duration, setDuration] = useState(plan ? plan.duration : 0);
   const [price, setPrice] = useState(plan ? plan.price : 0);
-  const [submit, loading] = useApiSubmit({
+  const [submit, submitLoading] = useApiSubmit({
     api,
     url: `/plans`,
     success: () =>
@@ -34,8 +32,31 @@ function CreatePlan({ location }) {
     failed: () => toast.error('Não foi possível salvar este plano.'),
     setResponse: setPlan,
   });
+  const [getPlanById, getPlanByIdLoading] = useApiGetById(
+    api,
+    '/plans',
+    setPlan
+  );
+
+  useEffect(() => {
+    const { id } = match.params;
+    if (!plan && id) {
+      getPlanById(id);
+    }
+  }, [getPlanById, match, plan]);
+
+  useEffect(() => {
+    if (plan) {
+      setDuration(plan.duration);
+      setPrice(plan.price);
+    }
+  }, [plan]);
 
   const total = useMemo(() => formatPrice(duration * price), [duration, price]);
+  const loading = useMemo(() => submitLoading || getPlanByIdLoading, [
+    getPlanByIdLoading,
+    submitLoading,
+  ]);
 
   return (
     <Container>
@@ -113,6 +134,9 @@ CreatePlan.propTypes = {
       data: PropTypes.object,
     }),
   }),
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }),
 };
 
 CreatePlan.defaultProps = {
@@ -121,6 +145,7 @@ CreatePlan.defaultProps = {
       data: null,
     }),
   }),
+  match: null,
 };
 
 export default CreatePlan;
