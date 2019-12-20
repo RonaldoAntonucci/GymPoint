@@ -18,7 +18,7 @@ function NInput({
   ...rest
 }) {
   return (
-    <Container withIco={!!ico} {...rest}>
+    <Container withIco={!!ico}>
       {ico && <IcoContent ico={ico} />}
       <Input
         id={name}

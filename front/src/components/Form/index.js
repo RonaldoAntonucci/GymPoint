@@ -7,12 +7,7 @@ import DatePicker from './DatePicker';
 
 import Loading from '~/components/Loading';
 
-export const FormInput = styled(Input)`
-  width: 100%;
-  & + div {
-    margin-left: 20px;
-  }
-`;
+export const FormInput = styled(Input)``;
 
 export const FormRow = styled.div`
   margin-bottom: 15px;
@@ -22,12 +17,7 @@ export const FormRow = styled.div`
   justify-content: center;
 `;
 
-export const FormSelect = styled(Select)`
-  width: 100%;
-  & + div {
-    margin-left: 20px;
-  }
-`;
+export const FormSelect = styled(Select)``;
 
 export const FormDatePicker = styled(DatePicker)``;
 

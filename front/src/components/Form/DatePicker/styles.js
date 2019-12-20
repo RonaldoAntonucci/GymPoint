@@ -6,6 +6,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 0 5px;
+  width: 100%;
+
+  & + div {
+    margin-left: 20px;
+  }
 
   label {
     display: flex;

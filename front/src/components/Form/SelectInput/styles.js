@@ -6,9 +6,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: relative;
-  padding: 0 5px;
   width: 100%;
+
+  & + div {
+    margin-left: 20px;
+  }
 
   label {
     margin-bottom: 8px;

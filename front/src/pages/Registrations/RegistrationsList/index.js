@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { MdAdd } from 'react-icons/md';
-import { useApiGetRequest } from '~/hooks';
+import { useApiGetRequest, useHandleEdit } from '~/hooks';
 
 import Container from '~/components/Container';
 import Content from '~/components/Content';
@@ -21,6 +21,7 @@ export default function RegistrationsList() {
   const [data, totalPages] = useApiGetRequest(api, '/registrations', {
     params: { page },
   });
+  const handleEdit = useHandleEdit('registrations');
 
   const registrations = useMemo(() => {
     return !data
@@ -42,10 +43,6 @@ export default function RegistrationsList() {
           active: registration.active,
         }));
   }, [data]);
-
-  const handleEdit = useCallback(d => {
-    console.log(d);
-  }, []);
 
   return (
     <Container>

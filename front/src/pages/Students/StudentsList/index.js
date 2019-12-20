@@ -20,7 +20,7 @@ import api from '~/services/api';
 export default function StudentsList() {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({});
-  const handleEdit = useHandleEdit('students/create');
+  const handleEdit = useHandleEdit('students');
   const handleDelete = useHandleDelete(
     'Se confirmar, o aluno será deletado. Isso é irreversível. Desejamesmo excluí-lo?'
   );

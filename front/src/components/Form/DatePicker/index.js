@@ -10,10 +10,10 @@ import { Container } from './styles';
 
 setDefaultLocale(pt);
 
-function DatePicker({ name, label, initialValue }) {
+function DatePicker({ name, label, initialValue, onChange, ...rest }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [selected, setSelected] = useState(initialValue);
+  const [selected, setSelected] = useState(initialValue || defaultValue);
 
   useEffect(() => {
     registerField({
@@ -31,10 +31,14 @@ function DatePicker({ name, label, initialValue }) {
       {label && <label htmlFor={fieldName}>{label}</label>}
       <ReactDatePicker
         name={fieldName}
-        selected={selected || defaultValue}
-        onChange={date => setSelected(date)}
+        selected={selected}
+        onChange={date => {
+          setSelected(date);
+          onChange(date);
+        }}
         ref={ref}
         defaultValue={new Date()}
+        {...rest}
       />
       {error && <span>{error}</span>}
     </Container>
@@ -45,11 +49,13 @@ DatePicker.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   initialValue: PropTypes.instanceOf(Date),
+  onChange: PropTypes.func,
 };
 
 DatePicker.defaultProps = {
   label: null,
   initialValue: null,
+  onChange: () => {},
 };
 
 export default DatePicker;
