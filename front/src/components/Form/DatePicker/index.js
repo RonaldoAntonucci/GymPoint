@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import ReactDatePicker, { setDefaultLocale } from 'react-datepicker';
 import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
@@ -10,7 +10,15 @@ import { Container } from './styles';
 
 setDefaultLocale(pt);
 
-function DatePicker({ name, label, initialValue, onChange, ...rest }) {
+function DatePicker({
+  name,
+  label,
+  initialValue,
+  onChange,
+  dateFormat,
+  value,
+  ...rest
+}) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(initialValue || defaultValue);
@@ -31,13 +39,14 @@ function DatePicker({ name, label, initialValue, onChange, ...rest }) {
       {label && <label htmlFor={fieldName}>{label}</label>}
       <ReactDatePicker
         name={fieldName}
-        selected={selected}
+        selected={value || selected}
         onChange={date => {
           setSelected(date);
           onChange(date);
         }}
         ref={ref}
         defaultValue={new Date()}
+        dateFormat={dateFormat}
         {...rest}
       />
       {error && <span>{error}</span>}
@@ -50,12 +59,14 @@ DatePicker.propTypes = {
   label: PropTypes.string,
   initialValue: PropTypes.instanceOf(Date),
   onChange: PropTypes.func,
+  dateFormat: PropTypes.string,
 };
 
 DatePicker.defaultProps = {
   label: null,
   initialValue: null,
   onChange: () => {},
+  dateFormat: 'dd/MM/yyyy',
 };
 
 export default DatePicker;

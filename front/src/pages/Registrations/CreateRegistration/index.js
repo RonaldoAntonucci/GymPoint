@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import { format, addMonths } from 'date-fns';
+import { format, addMonths, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { useApiSubmit, useApiGetRequest } from '~/hooks';
 
 import { formatPrice } from '~/util/format';
@@ -29,10 +30,11 @@ function CreateRegistration({ location }) {
     location.state ? location.state.data : null
   );
   const [startDate, setStartDate] = useState(new Date());
-  const [plan, setPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const [studentsPage, setStudentsPage] = useState(1);
   const [plansPage, setPlansPage] = useState(1);
   const [studentsFilter, setStudentsFilter] = useState('');
+
   const [students, studentTotalPages] = useApiGetRequest(api, '/students', {
     params: { page: studentsPage, q: studentsFilter },
   });
@@ -40,47 +42,18 @@ function CreateRegistration({ location }) {
     params: { page: plansPage },
   });
 
-  const [studentOptions, studentData] = useMemo(() => {
-    if (students) {
-      const opt = [];
-      const stdData = [];
-
-      students.forEach(std => {
-        opt.push({
-          id: std.id,
-          title: std.email,
-        });
-
-        stdData[std.id] = std;
-      });
-
-      return [opt, stdData];
-    }
-    return [[], []];
-  }, [students]);
-
-  const [planOptions, planData] = useMemo(() => {
-    if (plans) {
-      const opt = [];
-      const plnData = [];
-
-      plans.forEach(pln => {
-        opt.push({
-          id: pln.id,
-          title: pln.title,
-        });
-
-        plnData[pln.id] = pln;
-      });
-
-      return [opt, plnData];
-    }
-    return [[], []];
-  }, [plans]);
+  const studentOptions = useMemo(
+    () =>
+      students.map(student => ({
+        id: student.id,
+        title: student.email,
+      })),
+    [students]
+  );
 
   const [submit, submitLoading] = useApiSubmit({
     api,
-    url: `/plans`,
+    url: `/registrations`,
     success: () =>
       toast.success(
         `Matrícula ${registration ? 'editada' : 'cadastrada'} com sucesso.`
@@ -93,29 +66,51 @@ function CreateRegistration({ location }) {
     (submitLoading || !plans || !students).toString();
   }, [plans, students, submitLoading]);
 
-  const formattedEndDate = useMemo(() => {
-    if (planData && planData[plan]) {
-      return format(
-        addMonths(startDate, planData[plan].duration),
-        'MM/dd/yyyy'
-      );
-    }
-    return '';
-  }, [plan, planData, startDate]);
+  const handleSubmit = useCallback(
+    data => {
+      const formattedData = {
+        ...data,
+        start_date: format(data.start_date, "yyyy-MM-dd'T'HH:mm:ssxx", {
+          locale: pt,
+        }),
+      };
+      submit(formattedData);
+    },
+    [submit]
+  );
 
-  const formattedTotal = useMemo(() => {
-    if (planData && planData[plan]) {
-      return formatPrice(planData[plan].duration * planData[plan].price);
-    }
-    return formatPrice(0);
-  }, [plan, planData]);
+  const handleChangePlan = useCallback(
+    data => {
+      const plan = plans.find(p => p.id === Number(data));
+      setSelectedPlan(plan);
+    },
+    [plans]
+  );
+
+  const endDate = useMemo(
+    () =>
+      selectedPlan &&
+      addMonths(startDate, selectedPlan.duration, {
+        locale: pt,
+      }),
+
+    [selectedPlan, startDate]
+  );
+
+  const totalPrice = useMemo(
+    () =>
+      formatPrice(
+        selectedPlan ? selectedPlan.price * selectedPlan.duration : 0
+      ),
+    [selectedPlan]
+  );
 
   return (
     <Container>
       <Content>
         <Form
           initialData={registration}
-          onSubmit={console.log}
+          onSubmit={handleSubmit}
           loading={loading}
         >
           <Title>
@@ -154,8 +149,8 @@ function CreateRegistration({ location }) {
               name="plan_id"
               label="PLANO"
               placeholder="Selecione o plano"
-              options={planOptions}
-              onChange={data => setPlan(data.target.value)}
+              options={plans}
+              onChange={data => handleChangePlan(data.target.value)}
             />
             <FormDatePicker
               name="start_date"
@@ -163,19 +158,17 @@ function CreateRegistration({ location }) {
               label="DATA DE INÍCIO"
               initialValue={startDate}
               onChange={setStartDate}
-              dateFormat="dd/MM/yyyy"
             />
-            <FormInput
+            <FormDatePicker
               name="end_date"
-              type="text"
-              value={formattedEndDate}
-              readOnly
+              value={endDate}
               label="DATA DE TÉRMINO"
+              readOnly
             />
             <FormInput
               name="total"
               type="text"
-              value={formattedTotal}
+              value={totalPrice}
               readOnly
               label="VALOR FINAL"
             />

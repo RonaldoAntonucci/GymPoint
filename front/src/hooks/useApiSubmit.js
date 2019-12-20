@@ -17,6 +17,8 @@ export default function({
         const complement = data.id ? `/${data.id}` : '';
         const response = await method(`${url}${complement}`, data);
 
+        console.log(response);
+
         setResponse(response.data);
         if (typeof success === 'function') success();
       } catch (err) {

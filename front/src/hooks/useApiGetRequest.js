@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 export default function(api, url, options) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getData() {
-      setData(null);
       try {
         const response = await api.get(url, {
           ...options,
